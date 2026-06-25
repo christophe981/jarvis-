@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "PowerShell(\\(New-Object Media.SoundPlayer 'C:\\\\Windows\\\\Media\\\\notify.wav'\\).PlaySync\\(\\); Write-Output \"OK son joué\")",
+      "PowerShell(@\\('C:\\\\Users\\\\lacha\\\\Downloads\\\\jarvis-starter-kit\\\\.claude\\\\settings.local.json','C:\\\\Users\\\\lacha\\\\Downloads\\\\jarvis-starter-kit\\\\settings.local.json','C:\\\\Users\\\\lacha\\\\.claude\\\\settings.local.json','C:\\\\Users\\\\lacha\\\\.claude\\\\settings.json'\\) | ForEach-Object { [pscustomobject]@{ Path=$_; Exists=\\(Test-Path $_\\) } })",
+      "PowerShell($j = Get-Content 'C:\\\\Users\\\\lacha\\\\.claude\\\\settings.json' -Raw | ConvertFrom-Json; Write-Output \\(\"JSON valide. Commande du hook : \" + $j.hooks.Notification[0].hooks[0].command\\))"
+    ]
+  }
+}
