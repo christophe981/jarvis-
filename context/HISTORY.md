@@ -9,6 +9,12 @@
 
 ## 2026-06-25
 
+### Test Notion + Canva : tableau de bord "Ma méthode de travail"
+- Première session de test des intégrations Notion et Canva
+- Création d'un tableau de bord Notion synthétisant ma méthode de travail avec Jarvis (qui je suis, objectifs, règles de communication, commandes)
+- Génération d'un visuel récapitulatif sur Canva (infographie), exporté en PNG
+- Conclusion : le combo Notion + Canva fonctionne, base réutilisable pour de futurs livrables clients
+
 ### Installation initiale du Jarvis
 - Workspace personnalisé pour Christophe Lachaud, basé à Périgueux (Dordogne), 47 ans, marié, père de 3 enfants
 - Profil principal : mix (employé à temps plein + freelance en lancement)

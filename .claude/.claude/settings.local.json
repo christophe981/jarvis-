@@ -5,7 +5,12 @@
       "Skill(update-config:*)",
       "PowerShell(\\(New-Object Media.SoundPlayer 'C:\\\\Windows\\\\Media\\\\notify.wav'\\).PlaySync\\(\\); Write-Output \"OK son joué\")",
       "PowerShell(@\\('C:\\\\Users\\\\lacha\\\\Downloads\\\\jarvis-starter-kit\\\\.claude\\\\settings.local.json','C:\\\\Users\\\\lacha\\\\Downloads\\\\jarvis-starter-kit\\\\settings.local.json','C:\\\\Users\\\\lacha\\\\.claude\\\\settings.local.json','C:\\\\Users\\\\lacha\\\\.claude\\\\settings.json'\\) | ForEach-Object { [pscustomobject]@{ Path=$_; Exists=\\(Test-Path $_\\) } })",
-      "PowerShell($j = Get-Content 'C:\\\\Users\\\\lacha\\\\.claude\\\\settings.json' -Raw | ConvertFrom-Json; Write-Output \\(\"JSON valide. Commande du hook : \" + $j.hooks.Notification[0].hooks[0].command\\))"
+      "PowerShell($j = Get-Content 'C:\\\\Users\\\\lacha\\\\.claude\\\\settings.json' -Raw | ConvertFrom-Json; Write-Output \\(\"JSON valide. Commande du hook : \" + $j.hooks.Notification[0].hooks[0].command\\))",
+      "mcp__cd5cf8b2-ca60-4bfb-aaef-0392907934be__notion-search",
+      "mcp__cd5cf8b2-ca60-4bfb-aaef-0392907934be__notion-create-pages",
+      "mcp__9291e5b4-5cca-4450-8093-9158f8d94e1b__generate-design",
+      "mcp__9291e5b4-5cca-4450-8093-9158f8d94e1b__create-design-from-candidate",
+      "mcp__9291e5b4-5cca-4450-8093-9158f8d94e1b__export-design"
     ]
   }
 }

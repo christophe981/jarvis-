@@ -72,9 +72,9 @@ Liste des projets ou chantiers actifs sur lesquels je veux que Claude m'aide :
 
 ### Outils que j'utilise au quotidien
 
-- Notion (encore timidement)
+- Notion (en cours d'adoption, testé en lien direct avec Jarvis pour créer des tableaux de bord)
 - Google Sheets / Google Workspace (un peu)
-- Canva
+- Canva (testé en lien direct avec Jarvis pour générer des visuels)
 - WhatsApp
 - GPT personnalisés (pour la restitution de calls et d'interviews à partir de transcriptions)
 
