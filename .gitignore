@@ -1,8 +1,81 @@
-# Fichiers systeme Windows / macOS
+# ============================================================
+# .gitignore — Jarvis Workspace de Christophe Lachaud
+# ============================================================
+
+# --- Secrets et clés API (NE JAMAIS COMMITER) ---
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+*.key
+*.pem
+*secret*
+*_key*
+*api_key*
+
+# --- Système ---
+.DS_Store
 Thumbs.db
 Desktop.ini
-.DS_Store
+ehthumbs.db
 
-# Fichiers temporaires
+# --- Éditeurs ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-workspace
+
+# --- Node.js ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm
+.yarn/cache
+.pnp.*
+
+# --- Dossiers de build ---
+dist/
+build/
+.next/
+out/
+.nuxt/
+.output/
+.cache/
+.parcel-cache/
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# --- Logs ---
+logs/
+*.log
+*.log.*
+
+# --- Fichiers temporaires ---
 *.tmp
+*.temp
 *~
+*.bak
+*.swp
+
+# --- Divers ---
+.vercel
+.netlify
+coverage/
+.nyc_output/
