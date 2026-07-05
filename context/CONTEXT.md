@@ -31,11 +31,14 @@ Mon parcours : 2 ans en restauration, 12 ans en bâtiment / génie civil, 15 ans
 - Note : remise en question régulière du fait de l'ennui et du manque de perspectives futures
 
 **Activité freelance (indépendant en lancement) :**
-- Activité : OBM (Online Business Manager) - gestion de projets, d'outils, d'opérations et de structuration
-- Clients types visés : TPE/PME, dirigeants, directions générales, créateurs de contenu
-- Modèle économique : prestation freelance en auto-entreprise (statut en cours de finalisation)
-- Secteurs d'intérêt explorés : événementiel (camping), sport / nutrition / bien-être, salles de sport, BTP
-- Statut actuel : encore en formation, offre non encore définie
+- Activité : OBM (Online Business Manager), avec une signature claire : structurer ET automatiser
+- Positionnement (depuis le 30/06/2026) : aider les dirigeants de TPE débordés à reprendre le contrôle de leur temps grâce à l'automatisation, l'IA et une gestion de projet carrée
+- Niche = un service (auto/IA + gestion de projet), pas un secteur. Compétences horizontales, transférables.
+- Secteur de lancement (tête de pont) : le BTP, pour la crédibilité immédiate (27 ans bâtiment/TP) et le cash rapide. Logique beachhead : démarrer en BTP, prouver le modèle, puis pivoter vers un secteur plus désiré.
+- Modèle économique : auto-entreprise (création en cours avec Me Camille Pipelier), régime BNC, versement forfaitaire libératoire 2,2 %, franchise en base de TVA (seuil 41 250 €), plafond CA 77 700 €
+- Outil de facturation prévu : Conto (facturation électronique obligatoire dès septembre 2026)
+- Statut de l'offre : positionnement clarifié, textes du site et formules détaillées en cours
+- Depuis le 02/07/2026 : le modèle économique s'élargit à deux volets. (1) Service OBM classique, contrats sur mesure avec les clients pilotes. (2) Produit SaaS ("Pilotage BTP", nom de travail) vendu directement en ligne, acquisition prévue par publicité payante sur les réseaux sociaux en lien avec le site vitrine, inscription 100 % self-service. Les deux volets coexistent : les clients pilotes restent facturés manuellement, le canal publicitaire est pensé pour scaler sans intervention manuelle.
 
 ---
 
@@ -61,10 +64,10 @@ Liste des projets ou chantiers actifs sur lesquels je veux que Claude m'aide :
 
 - Finaliser ma formation OBM (qui me donne du fil à retordre)
 - Créer mon statut auto-entrepreneur et sécuriser des contrats conformes pour mes futurs clients
-- Définir mon offre et ma niche (difficulté à me projeter, intérêt pour de nombreux domaines)
+- Décliner l'offre détaillée (formules, prix) à partir du positionnement clarifié (BTP + auto/IA + gestion de projet)
 - Devenir expert en prospection (LinkedIn, Instagram, mon site)
 - Monter en compétence sur la vente, le marketing, les calls et les interviews
-- À terme : créer une application dans le domaine du sport ou du BTP (demande perçue comme forte)
+- Construire "Pilotage BTP" (nom de travail), le SaaS destiné à être vendu en ligne aux dirigeants de TPE du BTP : dashboard unifié, devis/relances automatisées, suivi de chantier. En cours de développement avec Claude (Next.js + Supabase + Vercel), Phase 1 sur 7 en cours. Ex-idée vague "créer une application sport ou BTP à terme", devenue un chantier concret et prioritaire
 
 ---
 
@@ -99,3 +102,4 @@ La prospection en priorité, pour décrocher un premier client. Ensuite, analyse
 > Cette section se remplira au fil du temps avec les éléments de contexte qui émergent naturellement dans mes sessions avec Claude.
 
 - Tendance à m'intéresser à beaucoup de sujets en même temps, ce qui rend la définition d'une cible et d'une niche difficile. Point de vigilance pour éviter la dispersion.
+- Tension stratégique assumée : le secteur BTP me dégoûte, mais je le choisis comme terrain de lancement pour la crédibilité et le cash rapide. Angle de réconciliation : "je connais cette galère par cœur, je sais la faire disparaître". Vigilance : surveiller que l'enthousiasme en prospection tienne dans la durée, sinon enclencher le pivot beachhead plus tôt.
