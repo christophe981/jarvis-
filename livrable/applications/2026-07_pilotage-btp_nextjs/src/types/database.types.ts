@@ -9,6 +9,15 @@ export type MemberRole = "owner" | "admin" | "member"
 export type MemberStatus = "invited" | "active"
 export type ChantierStatus = "a_venir" | "en_cours" | "termine" | "archive"
 export type DevisStatus = "brouillon" | "envoye" | "accepte" | "refuse" | "expire"
+export type SubscriptionStatus =
+  | "incomplete"
+  | "trialing"
+  | "active"
+  | "past_due"
+  | "canceled"
+  | "unpaid"
+  | "incomplete_expired"
+  | "paused"
 
 type OrganizationRow = {
   id: string
@@ -103,6 +112,17 @@ type DevisLineRow = {
   unit: string | null
   unit_price: number
   total: number
+}
+
+type SubscriptionRow = {
+  id: string
+  org_id: string
+  stripe_customer_id: string
+  stripe_subscription_id: string | null
+  status: SubscriptionStatus
+  current_period_end: string | null
+  created_at: string
+  updated_at: string
 }
 
 export type Database = {
@@ -226,6 +246,20 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: SubscriptionRow
+        Insert: Partial<SubscriptionRow> & Pick<SubscriptionRow, "org_id" | "stripe_customer_id">
+        Update: Partial<SubscriptionRow>
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: true
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: Record<string, never>
     Functions: {
@@ -241,12 +275,27 @@ export type Database = {
         Args: { target_org: string }
         Returns: boolean
       }
+      upsert_subscription_customer: {
+        Args: { p_org_id: string; p_stripe_customer_id: string }
+        Returns: undefined
+      }
+      sync_subscription_status: {
+        Args: {
+          p_stripe_customer_id: string
+          p_stripe_subscription_id: string | null
+          p_status: SubscriptionStatus
+          p_current_period_end: string | null
+          p_shared_secret: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       member_role: MemberRole
       member_status: MemberStatus
       chantier_status: ChantierStatus
       devis_status: DevisStatus
+      subscription_status: SubscriptionStatus
     }
   }
 }

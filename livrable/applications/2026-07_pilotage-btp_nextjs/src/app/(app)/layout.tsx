@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { href: "/factures", label: "Factures" },
   { href: "/relances", label: "Relances" },
   { href: "/rapports", label: "Rapports" },
+  { href: "/parametres/abonnement", label: "Paramètres" },
 ]
 
 // Squelette temporaire : la version finale de cette interface viendra du
