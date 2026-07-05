@@ -8,6 +8,7 @@
 export type MemberRole = "owner" | "admin" | "member"
 export type MemberStatus = "invited" | "active"
 export type ChantierStatus = "a_venir" | "en_cours" | "termine" | "archive"
+export type DevisStatus = "brouillon" | "envoye" | "accepte" | "refuse" | "expire"
 
 type OrganizationRow = {
   id: string
@@ -73,6 +74,35 @@ type ChantierUpdateRow = {
   note: string | null
   photo_urls: string[]
   created_at: string
+}
+
+type DevisRow = {
+  id: string
+  org_id: string
+  client_id: string
+  chantier_id: string | null
+  number: string
+  status: DevisStatus
+  amount_ht: number
+  tva_rate: number
+  amount_ttc: number
+  issued_date: string
+  valid_until: string | null
+  sent_at: string | null
+  responded_at: string | null
+  notes: string | null
+  created_at: string
+}
+
+type DevisLineRow = {
+  id: string
+  devis_id: string
+  position: number
+  description: string
+  quantity: number
+  unit: string | null
+  unit_price: number
+  total: number
 }
 
 export type Database = {
@@ -154,6 +184,48 @@ export type Database = {
           },
         ]
       }
+      devis: {
+        Row: DevisRow
+        Insert: Partial<DevisRow> & Pick<DevisRow, "org_id" | "client_id" | "number">
+        Update: Partial<DevisRow>
+        Relationships: [
+          {
+            foreignKeyName: "devis_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "devis_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "devis_chantier_id_fkey"
+            columns: ["chantier_id"]
+            isOneToOne: false
+            referencedRelation: "chantiers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      devis_lines: {
+        Row: DevisLineRow
+        Insert: Partial<DevisLineRow> & Pick<DevisLineRow, "devis_id" | "description">
+        Update: Partial<DevisLineRow>
+        Relationships: [
+          {
+            foreignKeyName: "devis_lines_devis_id_fkey"
+            columns: ["devis_id"]
+            isOneToOne: false
+            referencedRelation: "devis"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: Record<string, never>
     Functions: {
@@ -174,6 +246,7 @@ export type Database = {
       member_role: MemberRole
       member_status: MemberStatus
       chantier_status: ChantierStatus
+      devis_status: DevisStatus
     }
   }
 }

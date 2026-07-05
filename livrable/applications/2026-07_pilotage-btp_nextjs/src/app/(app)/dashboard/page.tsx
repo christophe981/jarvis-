@@ -5,6 +5,7 @@ import { getActiveOrg } from "@/lib/supabase/org"
 import {
   getChantiersEnCours,
   getChantiersEnCoursCount,
+  getDevisEnAttente,
   getRecentActivity,
 } from "@/lib/queries/dashboard"
 
@@ -13,14 +14,16 @@ export default async function DashboardPage() {
 
   let orgName = "—"
   let chantiersEnCoursCount = 0
+  let devisEnAttente = { count: 0, total: 0 }
   let chantiersEnCours: Awaited<ReturnType<typeof getChantiersEnCours>> = []
   let activity: Awaited<ReturnType<typeof getRecentActivity>> = []
 
   if (orgId) {
     const { data: org } = await supabase.from("organizations").select("name").eq("id", orgId).single()
     orgName = org?.name ?? "—"
-    ;[chantiersEnCoursCount, chantiersEnCours, activity] = await Promise.all([
+    ;[chantiersEnCoursCount, devisEnAttente, chantiersEnCours, activity] = await Promise.all([
       getChantiersEnCoursCount(supabase, orgId),
+      getDevisEnAttente(supabase, orgId),
       getChantiersEnCours(supabase, orgId),
       getRecentActivity(supabase, orgId),
     ])
@@ -45,8 +48,8 @@ export default async function DashboardPage() {
             <CardTitle className="text-sm text-muted-foreground">Devis en attente</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-semibold text-muted-foreground">—</p>
-            <p className="text-xs text-muted-foreground">Disponible en Phase 2</p>
+            <p className="text-2xl font-semibold">{devisEnAttente.count}</p>
+            <p className="text-xs text-muted-foreground">{devisEnAttente.total.toFixed(2)} €</p>
           </CardContent>
         </Card>
         <Card>

@@ -14,6 +14,20 @@ export async function getChantiersEnCoursCount(supabase: Client, orgId: string) 
   return count ?? 0
 }
 
+export async function getDevisEnAttente(supabase: Client, orgId: string) {
+  const { data } = await supabase
+    .from("devis")
+    .select("amount_ttc")
+    .eq("org_id", orgId)
+    .eq("status", "envoye")
+
+  const rows = data ?? []
+  return {
+    count: rows.length,
+    total: rows.reduce((sum, row) => sum + Number(row.amount_ttc), 0),
+  }
+}
+
 export async function getChantiersEnCours(supabase: Client, orgId: string) {
   const { data } = await supabase
     .from("chantiers")
@@ -32,14 +46,14 @@ export async function getChantiersEnCours(supabase: Client, orgId: string) {
 
 type ActivityItem = {
   id: string
-  type: "client" | "chantier" | "update"
+  type: "client" | "chantier" | "update" | "devis"
   label: string
   href: string
   createdAt: string
 }
 
 export async function getRecentActivity(supabase: Client, orgId: string): Promise<ActivityItem[]> {
-  const [clientsRes, chantiersRes, updatesRes] = await Promise.all([
+  const [clientsRes, chantiersRes, updatesRes, devisRes] = await Promise.all([
     supabase
       .from("clients")
       .select("id, name, created_at")
@@ -55,6 +69,12 @@ export async function getRecentActivity(supabase: Client, orgId: string): Promis
     supabase
       .from("chantier_updates")
       .select("id, chantier_id, progress_percent, created_at, chantiers(name)")
+      .eq("org_id", orgId)
+      .order("created_at", { ascending: false })
+      .limit(5),
+    supabase
+      .from("devis")
+      .select("id, number, created_at")
       .eq("org_id", orgId)
       .order("created_at", { ascending: false })
       .limit(5),
@@ -86,6 +106,13 @@ export async function getRecentActivity(supabase: Client, orgId: string): Promis
         createdAt: u.created_at as string,
       }
     }),
+    ...(devisRes.data ?? []).map((d) => ({
+      id: `devis-${d.id}`,
+      type: "devis" as const,
+      label: `Nouveau devis : ${d.number}`,
+      href: `/devis/${d.id}`,
+      createdAt: d.created_at as string,
+    })),
   ]
 
   return items
