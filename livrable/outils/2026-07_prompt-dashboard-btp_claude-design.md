@@ -5,6 +5,15 @@
 > Écran 1 sur 7 de la séquence (voir plan MVP) : App shell + Dashboard.
 > Les écrans suivants (Clients, Chantiers, Devis, Factures, Relances, Rapports)
 > réutiliseront ce même prompt de base en changeant la section "ÉCRAN À CRÉER".
+> Voir aussi `2026-07_prompts-ecrans-clients-chantiers-devis_claude-design.md`
+> pour les écrans Clients/Chantiers/Devis.
+>
+> Repères concurrentiels (recherche du 06/07/2026 sur des logiciels BTP réels :
+> Alobees, et le comparatif pilotagebtp.com) : sidebar de navigation fixe +
+> mobile-first sont des standards du secteur, à conserver. Le "CA du mois"
+> gagnerait à être décliné "par chantier" à terme (Alobees met en avant le
+> suivi de rentabilité par chantier) — pas requis pour ce premier prompt, mais
+> à garder en tête pour l'écran Rapports plus tard.
 
 ---
 
@@ -56,7 +65,7 @@ claire (on doit comprendre l'état de son activité en 5 secondes).
    - Factures
    - Relances
    - Rapports
-   - Paramètres (en bas de la sidebar, séparé visuellement du reste)
+   - Paramètres/Abonnement (en bas de la sidebar, séparé visuellement du reste)
    L'item actif doit être visuellement distinct (fond légèrement plus clair
    ou barre latérale accent #ff7a1a).
 
