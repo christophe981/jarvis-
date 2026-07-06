@@ -161,7 +161,7 @@ export function DevisForm({
 
         <div className="flex flex-col gap-2">
           {fields.map((field, index) => (
-            <div key={field.id} className="grid grid-cols-[1fr_80px_90px_110px_auto] gap-2 rounded-lg border border-[#e3e9f0] p-2.5">
+            <div key={field.id} className="grid grid-cols-[1fr_80px_90px_110px_auto] gap-2 rounded-lg border border-brand-line p-2.5">
               <div className="flex flex-col gap-1">
                 <Input
                   placeholder="Description"
@@ -207,7 +207,7 @@ export function DevisForm({
         </div>
         <div className="flex gap-6">
           <span className="text-muted-foreground">Total TTC</span>
-          <span className="font-semibold text-[#0f2742]">{totals.amountTtc.toFixed(2)} €</span>
+          <span className="font-semibold text-brand-navy">{totals.amountTtc.toFixed(2)} €</span>
         </div>
       </div>
 

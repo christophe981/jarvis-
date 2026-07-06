@@ -1,6 +1,5 @@
 import Link from "next/link"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getActiveOrg } from "@/lib/supabase/org"
 import {
   getChantiersEnCours,
@@ -8,6 +7,34 @@ import {
   getDevisEnAttente,
   getRecentActivity,
 } from "@/lib/queries/dashboard"
+import { cn } from "@/lib/utils"
+
+function StatCard({
+  label,
+  value,
+  caption,
+  muted,
+}: {
+  label: string
+  value: string
+  caption?: string
+  muted?: boolean
+}) {
+  return (
+    <div className="rounded-[14px] border border-brand-line bg-white p-4.5">
+      <div className="text-[12.5px] font-medium text-brand-muted">{label}</div>
+      <div
+        className={cn(
+          "mt-1.5 text-2xl font-extrabold",
+          muted ? "text-brand-muted-2" : "text-brand-navy"
+        )}
+      >
+        {value}
+      </div>
+      {caption && <div className="mt-0.5 text-xs text-brand-muted-2">{caption}</div>}
+    </div>
+  )
+}
 
 export default async function DashboardPage() {
   const { supabase, orgId } = await getActiveOrg()
@@ -32,80 +59,59 @@ export default async function DashboardPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-xl font-semibold text-[#0f2742]">Bienvenue, {orgName}</h1>
-        <p className="text-sm text-muted-foreground">Voici l&apos;état de votre activité.</p>
+        <h1 className="text-[22px] font-extrabold tracking-tight text-brand-navy">
+          Bienvenue, {orgName}
+        </h1>
+        <p className="mt-1 text-[13.5px] text-brand-muted">
+          Voici l&apos;état de votre activité aujourd&apos;hui.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-sm text-muted-foreground">Chantiers en cours</CardTitle>
-          </CardHeader>
-          <CardContent className="text-2xl font-semibold">{chantiersEnCoursCount}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-sm text-muted-foreground">Devis en attente</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-semibold">{devisEnAttente.count}</p>
-            <p className="text-xs text-muted-foreground">{devisEnAttente.total.toFixed(2)} €</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-sm text-muted-foreground">Factures en retard</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-semibold text-muted-foreground">—</p>
-            <p className="text-xs text-muted-foreground">Disponible en Phase 3</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-sm text-muted-foreground">CA du mois</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-semibold text-muted-foreground">—</p>
-            <p className="text-xs text-muted-foreground">Disponible en Phase 3</p>
-          </CardContent>
-        </Card>
+        <StatCard label="Chantiers en cours" value={String(chantiersEnCoursCount)} />
+        <StatCard
+          label="Devis en attente"
+          value={String(devisEnAttente.count)}
+          caption={`${devisEnAttente.total.toFixed(2)} €`}
+        />
+        <StatCard label="Factures en retard" value="—" caption="Disponible en Phase 3" muted />
+        <StatCard label="CA du mois" value="—" caption="Disponible en Phase 3" muted />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-[#e3e9f0] p-4">
-          <h2 className="mb-3 text-sm font-medium text-[#0f2742]">Chantiers en cours</h2>
+        <div className="rounded-[14px] border border-brand-line bg-white p-4.5">
+          <h2 className="mb-3 text-[13px] font-bold text-brand-navy">Chantiers en cours</h2>
           {chantiersEnCours.length > 0 ? (
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-1">
               {chantiersEnCours.map((chantier) => (
                 <li key={chantier.id}>
                   <Link
                     href={`/chantiers/${chantier.id}`}
-                    className="flex items-center justify-between rounded-lg px-2 py-1.5 text-sm hover:bg-muted/50"
+                    className="flex items-center justify-between rounded-[10px] px-2.5 py-2 text-[13px] hover:bg-brand-bg-soft"
                   >
-                    <span className="font-medium">{chantier.name}</span>
-                    <span className="text-muted-foreground">{chantier.clientName ?? "—"}</span>
+                    <span className="font-semibold text-brand-ink">{chantier.name}</span>
+                    <span className="text-brand-muted">{chantier.clientName ?? "—"}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-muted-foreground">Aucun chantier en cours.</p>
+            <p className="text-[13px] text-brand-muted">Aucun chantier en cours.</p>
           )}
         </div>
 
-        <div className="rounded-xl border border-[#e3e9f0] p-4">
-          <h2 className="mb-3 text-sm font-medium text-[#0f2742]">Activité récente</h2>
+        <div className="rounded-[14px] border border-brand-line bg-white p-4.5">
+          <h2 className="mb-3 text-[13px] font-bold text-brand-navy">Activité récente</h2>
           {activity.length > 0 ? (
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-1">
               {activity.map((item) => (
                 <li key={item.id}>
                   <Link
                     href={item.href}
-                    className="flex items-center justify-between rounded-lg px-2 py-1.5 text-sm hover:bg-muted/50"
+                    className="flex items-center justify-between rounded-[10px] px-2.5 py-2 text-[13px] hover:bg-brand-bg-soft"
                   >
-                    <span>{item.label}</span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-brand-ink">{item.label}</span>
+                    <span className="text-xs text-brand-muted-2">
                       {new Date(item.createdAt).toLocaleDateString("fr-FR")}
                     </span>
                   </Link>
@@ -113,7 +119,7 @@ export default async function DashboardPage() {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-muted-foreground">Aucune activité pour l&apos;instant.</p>
+            <p className="text-[13px] text-brand-muted">Aucune activité pour l&apos;instant.</p>
           )}
         </div>
       </div>

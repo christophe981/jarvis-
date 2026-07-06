@@ -1,13 +1,14 @@
 import { notFound } from "next/navigation"
 
 import { ChantierForm } from "@/components/chantiers/chantier-form"
+import { ChantierHeaderCard } from "@/components/chantiers/chantier-header-card"
 import { ChantierUpdateForm } from "@/components/chantiers/chantier-update-form"
 import { ChantierUpdateTimeline } from "@/components/chantiers/chantier-update-timeline"
-import { StatusBadge } from "@/components/chantiers/status-badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getActiveOrg } from "@/lib/supabase/org"
 import { getSignedPhotoUrl } from "@/lib/storage"
 import type { ChantierStatus } from "@/lib/validations/chantiers"
+import type { DevisStatusValue } from "@/lib/validations/devis"
 
 export default async function ChantierDetailPage({
   params,
@@ -21,23 +22,29 @@ export default async function ChantierDetailPage({
 
   const { data: chantier } = await supabase
     .from("chantiers")
-    .select("*")
+    .select("*, clients(name)")
     .eq("id", id)
     .eq("org_id", orgId)
     .single()
 
   if (!chantier) notFound()
 
-  const { data: clients } = await supabase
-    .from("clients")
-    .select("id, name")
-    .eq("org_id", orgId)
+  const [{ data: clients }, { data: updatesRaw }, { data: linkedDevis }] = await Promise.all([
+    supabase.from("clients").select("id, name").eq("org_id", orgId),
+    supabase
+      .from("chantier_updates")
+      .select("id, created_at, progress_percent, note, photo_urls")
+      .eq("chantier_id", id)
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("devis")
+      .select("id, number, status, amount_ttc")
+      .eq("chantier_id", id)
+      .order("created_at", { ascending: false }),
+  ])
 
-  const { data: updatesRaw } = await supabase
-    .from("chantier_updates")
-    .select("id, created_at, progress_percent, note, photo_urls")
-    .eq("chantier_id", id)
-    .order("created_at", { ascending: false })
+  const latestProgress =
+    (updatesRaw ?? []).find((u) => u.progress_percent !== null)?.progress_percent ?? null
 
   const updates = await Promise.all(
     (updatesRaw ?? []).map(async (update) => ({
@@ -54,18 +61,30 @@ export default async function ChantierDetailPage({
   )
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-3">
-        <h1 className="text-xl font-semibold text-[#0f2742]">{chantier.name}</h1>
-        <StatusBadge status={chantier.status as ChantierStatus} />
-      </div>
+    <div className="flex max-w-2xl flex-col gap-6">
+      <ChantierHeaderCard
+        name={chantier.name}
+        address={chantier.address}
+        status={chantier.status as ChantierStatus}
+        clientName={(chantier.clients as { name?: string } | null)?.name ?? null}
+        budget={chantier.budget_estimated}
+        startDate={chantier.start_date}
+        endDateEstimated={chantier.end_date_estimated}
+        progressPercent={latestProgress}
+        linkedDevis={(linkedDevis ?? []).map((d) => ({
+          id: d.id,
+          number: d.number,
+          status: d.status as DevisStatusValue,
+          amount_ttc: Number(d.amount_ttc),
+        }))}
+      />
 
       <Tabs defaultValue="infos">
         <TabsList>
           <TabsTrigger value="infos">Infos</TabsTrigger>
           <TabsTrigger value="avancement">Avancement</TabsTrigger>
         </TabsList>
-        <TabsContent value="infos" className="max-w-lg pt-4">
+        <TabsContent value="infos" className="pt-4">
           <ChantierForm
             chantierId={chantier.id}
             clients={clients ?? []}

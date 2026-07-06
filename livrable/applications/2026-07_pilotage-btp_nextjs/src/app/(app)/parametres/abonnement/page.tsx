@@ -26,9 +26,9 @@ export default async function AbonnementPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-xl font-semibold text-[#0f2742]">Abonnement</h1>
+      <h1 className="text-xl font-semibold text-brand-navy">Abonnement</h1>
 
-      <div className="max-w-md rounded-xl border border-[#e3e9f0] p-6">
+      <div className="max-w-md rounded-xl border border-brand-line p-6">
         <div className="mb-4 flex items-center justify-between">
           <span className="text-sm text-muted-foreground">Statut</span>
           {subscription ? (

@@ -23,57 +23,74 @@ export default async function ClientsPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-end justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-[#0f2742]">Clients</h1>
-          <p className="text-sm text-muted-foreground">
-            Les clients de votre entreprise.
+          <h1 className="text-[22px] font-extrabold tracking-tight text-brand-navy">Clients</h1>
+          <p className="mt-1 text-[13.5px] text-brand-muted">
+            {clients?.length ?? 0} client{(clients?.length ?? 0) !== 1 ? "s" : ""} de votre
+            entreprise.
           </p>
         </div>
         <NewClientDialog />
       </div>
 
       {clients && clients.length > 0 ? (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Nom</TableHead>
-              <TableHead>Entreprise</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Téléphone</TableHead>
-              <TableHead className="w-10" />
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {clients.map((client) => (
-              <TableRow key={client.id}>
-                <TableCell className="font-medium">{client.name}</TableCell>
-                <TableCell>{client.company_name || "—"}</TableCell>
-                <TableCell>{client.email || "—"}</TableCell>
-                <TableCell>{client.phone || "—"}</TableCell>
-                <TableCell>
-                  <ClientRowActions
-                    clientId={client.id}
-                    client={{
-                      name: client.name,
-                      companyName: client.company_name ?? "",
-                      email: client.email ?? "",
-                      phone: client.phone ?? "",
-                      address: client.address ?? "",
-                      siret: client.siret ?? "",
-                      notes: client.notes ?? "",
-                    }}
-                  />
-                </TableCell>
+        <div className="overflow-hidden rounded-[14px] border border-brand-line bg-white">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-[#f8fafd]">
+                <TableHead className="text-[10.5px] font-bold tracking-wide text-brand-muted-2 uppercase">
+                  Nom
+                </TableHead>
+                <TableHead className="text-[10.5px] font-bold tracking-wide text-brand-muted-2 uppercase">
+                  Entreprise
+                </TableHead>
+                <TableHead className="text-[10.5px] font-bold tracking-wide text-brand-muted-2 uppercase">
+                  Email
+                </TableHead>
+                <TableHead className="text-[10.5px] font-bold tracking-wide text-brand-muted-2 uppercase">
+                  Téléphone
+                </TableHead>
+                <TableHead className="w-10" />
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {clients.map((client) => (
+                <TableRow key={client.id}>
+                  <TableCell className="text-[13px] font-semibold text-brand-ink">
+                    {client.name}
+                  </TableCell>
+                  <TableCell className="text-[12.5px] text-brand-muted">
+                    {client.company_name || "—"}
+                  </TableCell>
+                  <TableCell className="text-[12.5px] text-brand-muted">
+                    {client.email || "—"}
+                  </TableCell>
+                  <TableCell className="text-[12.5px] text-brand-muted">
+                    {client.phone || "—"}
+                  </TableCell>
+                  <TableCell>
+                    <ClientRowActions
+                      clientId={client.id}
+                      client={{
+                        name: client.name,
+                        companyName: client.company_name ?? "",
+                        email: client.email ?? "",
+                        phone: client.phone ?? "",
+                        address: client.address ?? "",
+                        siret: client.siret ?? "",
+                        notes: client.notes ?? "",
+                      }}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       ) : (
-        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-[#e3e9f0] py-16 text-center">
-          <p className="text-sm text-muted-foreground">
-            Aucun client pour l&apos;instant.
-          </p>
+        <div className="flex flex-col items-center gap-3 rounded-[14px] border border-dashed border-brand-line py-16 text-center">
+          <p className="text-[13px] text-brand-muted">Aucun client pour l&apos;instant.</p>
           <NewClientDialog />
         </div>
       )}

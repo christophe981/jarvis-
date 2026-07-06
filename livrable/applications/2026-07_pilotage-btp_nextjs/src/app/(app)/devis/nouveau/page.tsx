@@ -13,7 +13,7 @@ export default async function NouveauDevisPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-xl font-semibold text-[#0f2742]">Nouveau devis</h1>
+      <h1 className="text-xl font-semibold text-brand-navy">Nouveau devis</h1>
       <div className="max-w-2xl">
         <DevisForm clients={clients ?? []} chantiers={chantiers ?? []} />
       </div>

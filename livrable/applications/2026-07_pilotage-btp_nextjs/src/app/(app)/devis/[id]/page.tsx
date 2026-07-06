@@ -45,7 +45,7 @@ export default async function DevisDetailPage({
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h1 className="text-xl font-semibold text-[#0f2742]">{devis.number}</h1>
+          <h1 className="text-xl font-semibold text-brand-navy">{devis.number}</h1>
           <DevisStatusBadge status={status} />
         </div>
         <div className="flex items-center gap-2">
@@ -83,14 +83,14 @@ export default async function DevisDetailPage({
           />
         </div>
       ) : (
-        <div className="max-w-2xl rounded-xl border border-[#e3e9f0] p-6">
+        <div className="max-w-2xl rounded-xl border border-brand-line p-6">
           <div className="mb-4 flex justify-between text-sm text-muted-foreground">
             <span>Client : {client?.name ?? "—"}</span>
             <span>Émis le {devis.issued_date}</span>
           </div>
           <div className="flex flex-col gap-2">
             {(lines ?? []).map((line) => (
-              <div key={line.id} className="flex justify-between border-b border-[#e3e9f0] py-2 text-sm">
+              <div key={line.id} className="flex justify-between border-b border-brand-line py-2 text-sm">
                 <span>
                   {line.description}
                   {line.unit ? ` (${line.quantity} ${line.unit})` : ` x${line.quantity}`}
@@ -101,7 +101,7 @@ export default async function DevisDetailPage({
           </div>
           <div className="mt-4 flex flex-col items-end gap-1 text-sm">
             <span className="text-muted-foreground">Total HT : {Number(devis.amount_ht).toFixed(2)} €</span>
-            <span className="font-semibold text-[#0f2742]">
+            <span className="font-semibold text-brand-navy">
               Total TTC : {Number(devis.amount_ttc).toFixed(2)} €
             </span>
           </div>

@@ -18,11 +18,11 @@ export function ChantierUpdateTimeline({ updates }: { updates: TimelineUpdate[] 
   return (
     <div className="flex flex-col gap-4">
       {updates.map((update) => (
-        <div key={update.id} className="rounded-xl border border-[#e3e9f0] p-4">
+        <div key={update.id} className="rounded-xl border border-brand-line p-4">
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>{new Date(update.createdAt).toLocaleString("fr-FR")}</span>
             {update.progressPercent !== null && (
-              <span className="font-medium text-[#0f2742]">
+              <span className="font-medium text-brand-navy">
                 {update.progressPercent}% d&apos;avancement
               </span>
             )}
