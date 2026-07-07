@@ -2,9 +2,11 @@ import Link from "next/link"
 
 import { getActiveOrg } from "@/lib/supabase/org"
 import {
+  getCaDuMois,
   getChantiersEnCours,
   getChantiersEnCoursCount,
   getDevisEnAttente,
+  getFacturesEnRetard,
   getRecentActivity,
 } from "@/lib/queries/dashboard"
 import { cn } from "@/lib/utils"
@@ -42,18 +44,23 @@ export default async function DashboardPage() {
   let orgName = "—"
   let chantiersEnCoursCount = 0
   let devisEnAttente = { count: 0, total: 0 }
+  let facturesEnRetard = { count: 0, total: 0 }
+  let caDuMois = 0
   let chantiersEnCours: Awaited<ReturnType<typeof getChantiersEnCours>> = []
   let activity: Awaited<ReturnType<typeof getRecentActivity>> = []
 
   if (orgId) {
     const { data: org } = await supabase.from("organizations").select("name").eq("id", orgId).single()
     orgName = org?.name ?? "—"
-    ;[chantiersEnCoursCount, devisEnAttente, chantiersEnCours, activity] = await Promise.all([
-      getChantiersEnCoursCount(supabase, orgId),
-      getDevisEnAttente(supabase, orgId),
-      getChantiersEnCours(supabase, orgId),
-      getRecentActivity(supabase, orgId),
-    ])
+    ;[chantiersEnCoursCount, devisEnAttente, facturesEnRetard, caDuMois, chantiersEnCours, activity] =
+      await Promise.all([
+        getChantiersEnCoursCount(supabase, orgId),
+        getDevisEnAttente(supabase, orgId),
+        getFacturesEnRetard(supabase, orgId),
+        getCaDuMois(supabase, orgId),
+        getChantiersEnCours(supabase, orgId),
+        getRecentActivity(supabase, orgId),
+      ])
   }
 
   return (
@@ -74,8 +81,13 @@ export default async function DashboardPage() {
           value={String(devisEnAttente.count)}
           caption={`${devisEnAttente.total.toFixed(2)} €`}
         />
-        <StatCard label="Factures en retard" value="—" caption="Disponible en Phase 3" muted />
-        <StatCard label="CA du mois" value="—" caption="Disponible en Phase 3" muted />
+        <StatCard
+          label="Factures en retard"
+          value={String(facturesEnRetard.count)}
+          caption={`${facturesEnRetard.total.toFixed(2)} €`}
+          muted={facturesEnRetard.count === 0}
+        />
+        <StatCard label="CA du mois" value={`${caDuMois.toFixed(2)} €`} caption="Paiements encaissés" />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">

@@ -9,6 +9,7 @@ import { getActiveOrg } from "@/lib/supabase/org"
 import { getSignedPhotoUrl } from "@/lib/storage"
 import type { ChantierStatus } from "@/lib/validations/chantiers"
 import type { DevisStatusValue } from "@/lib/validations/devis"
+import type { FactureStatusValue } from "@/lib/validations/factures"
 
 export default async function ChantierDetailPage({
   params,
@@ -29,19 +30,25 @@ export default async function ChantierDetailPage({
 
   if (!chantier) notFound()
 
-  const [{ data: clients }, { data: updatesRaw }, { data: linkedDevis }] = await Promise.all([
-    supabase.from("clients").select("id, name").eq("org_id", orgId),
-    supabase
-      .from("chantier_updates")
-      .select("id, created_at, progress_percent, note, photo_urls")
-      .eq("chantier_id", id)
-      .order("created_at", { ascending: false }),
-    supabase
-      .from("devis")
-      .select("id, number, status, amount_ttc")
-      .eq("chantier_id", id)
-      .order("created_at", { ascending: false }),
-  ])
+  const [{ data: clients }, { data: updatesRaw }, { data: linkedDevis }, { data: linkedFactures }] =
+    await Promise.all([
+      supabase.from("clients").select("id, name").eq("org_id", orgId),
+      supabase
+        .from("chantier_updates")
+        .select("id, created_at, progress_percent, note, photo_urls")
+        .eq("chantier_id", id)
+        .order("created_at", { ascending: false }),
+      supabase
+        .from("devis")
+        .select("id, number, status, amount_ttc")
+        .eq("chantier_id", id)
+        .order("created_at", { ascending: false }),
+      supabase
+        .from("factures")
+        .select("id, number, status, amount_ttc")
+        .eq("chantier_id", id)
+        .order("created_at", { ascending: false }),
+    ])
 
   const latestProgress =
     (updatesRaw ?? []).find((u) => u.progress_percent !== null)?.progress_percent ?? null
@@ -76,6 +83,12 @@ export default async function ChantierDetailPage({
           number: d.number,
           status: d.status as DevisStatusValue,
           amount_ttc: Number(d.amount_ttc),
+        }))}
+        linkedFactures={(linkedFactures ?? []).map((f) => ({
+          id: f.id,
+          number: f.number,
+          status: f.status as FactureStatusValue,
+          amount_ttc: Number(f.amount_ttc),
         }))}
       />
 

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
+import { ConvertToFactureButton } from "@/components/devis/convert-to-facture-button"
 import { DevisForm } from "@/components/devis/devis-form"
 import { DevisStatusActions } from "@/components/devis/devis-status-actions"
 import { DevisStatusBadge } from "@/components/devis/devis-status-badge"
@@ -41,6 +42,11 @@ export default async function DevisDetailPage({
   const status = devis.status as DevisStatusValue
   const client = devis.clients as { id: string; name: string } | null
 
+  const { data: linkedFacture } =
+    status === "accepte"
+      ? await supabase.from("factures").select("id").eq("devis_id", devis.id).maybeSingle()
+      : { data: null }
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -57,6 +63,18 @@ export default async function DevisDetailPage({
             Télécharger le PDF
           </Button>
           <DevisStatusActions devisId={devis.id} status={status} />
+          {status === "accepte" &&
+            (linkedFacture ? (
+              <Button
+                variant="outline"
+                render={<Link href={`/factures/${linkedFacture.id}`} />}
+                nativeButton={false}
+              >
+                Voir la facture
+              </Button>
+            ) : (
+              <ConvertToFactureButton devisId={devis.id} />
+            ))}
         </div>
       </div>
 

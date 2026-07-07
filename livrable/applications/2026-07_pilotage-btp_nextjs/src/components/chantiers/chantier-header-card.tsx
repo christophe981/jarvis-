@@ -1,14 +1,23 @@
 import Link from "next/link"
-import { FileTextIcon, MapPinIcon } from "lucide-react"
+import { FileTextIcon, MapPinIcon, ReceiptIcon } from "lucide-react"
 
 import { DevisStatusBadge } from "@/components/devis/devis-status-badge"
+import { FactureStatusBadge } from "@/components/factures/facture-status-badge"
 import { chantierStatusLabels, type ChantierStatus } from "@/lib/validations/chantiers"
 import type { DevisStatusValue } from "@/lib/validations/devis"
+import type { FactureStatusValue } from "@/lib/validations/factures"
 
 type LinkedDevis = {
   id: string
   number: string
   status: DevisStatusValue
+  amount_ttc: number
+}
+
+type LinkedFacture = {
+  id: string
+  number: string
+  status: FactureStatusValue
   amount_ttc: number
 }
 
@@ -22,6 +31,7 @@ export function ChantierHeaderCard({
   endDateEstimated,
   progressPercent,
   linkedDevis,
+  linkedFactures,
 }: {
   name: string
   address: string | null
@@ -32,6 +42,7 @@ export function ChantierHeaderCard({
   endDateEstimated: string | null
   progressPercent: number | null
   linkedDevis: LinkedDevis[]
+  linkedFactures: LinkedFacture[]
 }) {
   return (
     <div className="overflow-hidden rounded-[14px] border border-brand-line bg-white">
@@ -74,7 +85,7 @@ export function ChantierHeaderCard({
         <Fact label="Fin estimée" value={endDateEstimated || "—"} />
       </div>
 
-      {linkedDevis.length > 0 && (
+      {(linkedDevis.length > 0 || linkedFactures.length > 0) && (
         <div className="px-4.5 py-4">
           <div className="mb-2.5 text-xs font-bold text-brand-navy">Documents liés</div>
           <div className="flex flex-col gap-2">
@@ -94,6 +105,24 @@ export function ChantierHeaderCard({
                   </div>
                 </div>
                 <DevisStatusBadge status={devis.status} />
+              </Link>
+            ))}
+            {linkedFactures.map((facture) => (
+              <Link
+                key={facture.id}
+                href={`/factures/${facture.id}`}
+                className="flex items-center gap-3 rounded-[11px] border border-brand-line px-3 py-2.5 hover:bg-brand-bg-soft"
+              >
+                <div className="flex size-8 flex-none items-center justify-center rounded-[9px] bg-brand-accent/[0.1]">
+                  <ReceiptIcon className="size-4 text-brand-accent-hover" strokeWidth={1.8} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[12.5px] font-semibold text-brand-ink">{facture.number}</div>
+                  <div className="text-[11px] text-brand-muted-2">
+                    {facture.amount_ttc.toFixed(2)} €
+                  </div>
+                </div>
+                <FactureStatusBadge status={facture.status} />
               </Link>
             ))}
           </div>

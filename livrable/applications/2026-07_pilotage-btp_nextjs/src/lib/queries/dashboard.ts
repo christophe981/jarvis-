@@ -28,6 +28,33 @@ export async function getDevisEnAttente(supabase: Client, orgId: string) {
   }
 }
 
+export async function getFacturesEnRetard(supabase: Client, orgId: string) {
+  const { data } = await supabase
+    .from("factures")
+    .select("amount_ttc")
+    .eq("org_id", orgId)
+    .eq("status", "en_retard")
+
+  const rows = data ?? []
+  return {
+    count: rows.length,
+    total: rows.reduce((sum, row) => sum + Number(row.amount_ttc), 0),
+  }
+}
+
+export async function getCaDuMois(supabase: Client, orgId: string) {
+  const now = new Date()
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
+
+  const { data } = await supabase
+    .from("paiements")
+    .select("amount")
+    .eq("org_id", orgId)
+    .gte("paid_at", startOfMonth)
+
+  return (data ?? []).reduce((sum, row) => sum + Number(row.amount), 0)
+}
+
 export async function getChantiersEnCours(supabase: Client, orgId: string) {
   const { data } = await supabase
     .from("chantiers")

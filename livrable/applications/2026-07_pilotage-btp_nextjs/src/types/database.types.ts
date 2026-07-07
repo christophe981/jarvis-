@@ -18,6 +18,17 @@ export type SubscriptionStatus =
   | "unpaid"
   | "incomplete_expired"
   | "paused"
+export type FactureStatus =
+  | "brouillon"
+  | "envoyee"
+  | "payee_partielle"
+  | "payee"
+  | "en_retard"
+  | "annulee"
+export type PaiementMethod = "virement" | "cheque" | "especes" | "cb" | "autre"
+export type RelanceTargetType = "devis" | "facture"
+export type RelanceStatus = "planifiee" | "envoyee" | "echec" | "annulee"
+export type RelanceTrigger = "devis_sans_reponse" | "facture_en_retard"
 
 type OrganizationRow = {
   id: string
@@ -123,6 +134,69 @@ type SubscriptionRow = {
   current_period_end: string | null
   created_at: string
   updated_at: string
+}
+
+type FactureRow = {
+  id: string
+  org_id: string
+  client_id: string
+  chantier_id: string | null
+  devis_id: string | null
+  number: string
+  status: FactureStatus
+  amount_ht: number
+  tva_rate: number
+  amount_ttc: number
+  issued_date: string
+  due_date: string | null
+  sent_at: string | null
+  paid_at: string | null
+  notes: string | null
+  created_at: string
+}
+
+type FactureLineRow = {
+  id: string
+  facture_id: string
+  position: number
+  description: string
+  quantity: number
+  unit: string | null
+  unit_price: number
+  total: number
+}
+
+type PaiementRow = {
+  id: string
+  org_id: string
+  facture_id: string
+  amount: number
+  method: PaiementMethod
+  paid_at: string
+  created_at: string
+}
+
+type RelanceRow = {
+  id: string
+  org_id: string
+  target_type: RelanceTargetType
+  target_id: string
+  recipient_email: string
+  status: RelanceStatus
+  scheduled_for: string
+  sent_at: string | null
+  message_content: string | null
+  error_message: string | null
+  created_at: string
+}
+
+type RelanceRuleRow = {
+  id: string
+  org_id: string
+  trigger: RelanceTrigger
+  delay_days: number
+  active: boolean
+  created_at: string
 }
 
 export type Database = {
@@ -260,6 +334,105 @@ export type Database = {
           },
         ]
       }
+      factures: {
+        Row: FactureRow
+        Insert: Partial<FactureRow> & Pick<FactureRow, "org_id" | "client_id" | "number">
+        Update: Partial<FactureRow>
+        Relationships: [
+          {
+            foreignKeyName: "factures_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "factures_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "factures_chantier_id_fkey"
+            columns: ["chantier_id"]
+            isOneToOne: false
+            referencedRelation: "chantiers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "factures_devis_id_fkey"
+            columns: ["devis_id"]
+            isOneToOne: false
+            referencedRelation: "devis"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      facture_lines: {
+        Row: FactureLineRow
+        Insert: Partial<FactureLineRow> & Pick<FactureLineRow, "facture_id" | "description">
+        Update: Partial<FactureLineRow>
+        Relationships: [
+          {
+            foreignKeyName: "facture_lines_facture_id_fkey"
+            columns: ["facture_id"]
+            isOneToOne: false
+            referencedRelation: "factures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      paiements: {
+        Row: PaiementRow
+        Insert: Partial<PaiementRow> & Pick<PaiementRow, "org_id" | "facture_id" | "amount">
+        Update: Partial<PaiementRow>
+        Relationships: [
+          {
+            foreignKeyName: "paiements_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "paiements_facture_id_fkey"
+            columns: ["facture_id"]
+            isOneToOne: false
+            referencedRelation: "factures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      relances: {
+        Row: RelanceRow
+        Insert: Partial<RelanceRow> &
+          Pick<RelanceRow, "org_id" | "target_type" | "target_id" | "recipient_email">
+        Update: Partial<RelanceRow>
+        Relationships: [
+          {
+            foreignKeyName: "relances_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      relance_rules: {
+        Row: RelanceRuleRow
+        Insert: Partial<RelanceRuleRow> & Pick<RelanceRuleRow, "org_id" | "trigger" | "delay_days">
+        Update: Partial<RelanceRuleRow>
+        Relationships: [
+          {
+            foreignKeyName: "relance_rules_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: Record<string, never>
     Functions: {
@@ -289,6 +462,43 @@ export type Database = {
         }
         Returns: undefined
       }
+      get_devis_relances_dues: {
+        Args: { p_shared_secret: string; p_org_id?: string | null }
+        Returns: {
+          devis_id: string
+          org_id: string
+          client_email: string | null
+          client_name: string
+          number: string
+          amount_ttc: number
+          sent_at: string | null
+        }[]
+      }
+      get_factures_relances_dues: {
+        Args: { p_shared_secret: string; p_org_id?: string | null }
+        Returns: {
+          facture_id: string
+          org_id: string
+          client_email: string | null
+          client_name: string
+          number: string
+          amount_ttc: number
+          due_date: string | null
+        }[]
+      }
+      record_relance: {
+        Args: {
+          p_shared_secret: string
+          p_org_id: string
+          p_target_type: RelanceTargetType
+          p_target_id: string
+          p_recipient_email: string
+          p_status: RelanceStatus
+          p_message_content: string | null
+          p_error_message?: string | null
+        }
+        Returns: string
+      }
     }
     Enums: {
       member_role: MemberRole
@@ -296,6 +506,11 @@ export type Database = {
       chantier_status: ChantierStatus
       devis_status: DevisStatus
       subscription_status: SubscriptionStatus
+      facture_status: FactureStatus
+      paiement_method: PaiementMethod
+      relance_target_type: RelanceTargetType
+      relance_status: RelanceStatus
+      relance_trigger: RelanceTrigger
     }
   }
 }
