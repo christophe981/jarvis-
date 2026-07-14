@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christophe Lachaud — Reprenez le contrôle de votre temps | OBM pour le BTP</title>
+<meta name="description" content="J'aide les dirigeants de TPE du BTP à arrêter de crouler sous l'administratif. Je structure les opérations et j'automatise les tâches chronophages (devis, relances, reporting) avec des systèmes simples et de l'IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f2742;
+    --navy-2:#14385f;
+    --accent:#ff7a1a;
+    --accent-dark:#e96606;
+    --ink:#1c2733;
+    --muted:#5b6b7b;
+    --line:#e3e9f0;
+    --bg:#ffffff;
+    --bg-soft:#f5f8fc;
+    --radius:14px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  h1,h2,h3{line-height:1.2;color:var(--navy);font-weight:800;letter-spacing:-.02em}
+  h2{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:14px}
+  p{color:var(--muted)}
+  a{color:inherit}
+  .eyebrow{
+    display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:14px;
+  }
+  .btn{
+    display:inline-block;background:var(--accent);color:#fff;font-weight:700;
+    padding:15px 28px;border-radius:999px;text-decoration:none;font-size:1.02rem;
+    transition:transform .15s ease,background .2s ease;border:none;cursor:pointer;
+  }
+  .btn:hover{background:var(--accent-dark);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+  .btn-ghost:hover{background:rgba(255,255,255,.1)}
+  section{padding:84px 0}
+  .section-soft{background:var(--bg-soft)}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:50;background:rgba(15,39,66,.96);
+    backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{color:#fff;font-weight:800;font-size:1.05rem;text-decoration:none;letter-spacing:-.01em}
+  .brand span{color:var(--accent)}
+  .nav .btn{padding:10px 20px;font-size:.92rem}
+
+  /* Hero */
+  .hero{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#fff;padding:90px 0 96px;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(255,122,26,.22),transparent 70%);
+  }
+  .hero h1{color:#fff;font-size:clamp(2rem,5.4vw,3.4rem);max-width:18ch}
+  .hero p.lead{color:#cdd9e6;font-size:clamp(1.05rem,2.4vw,1.25rem);max-width:60ch;margin:20px 0 32px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{color:#9fb2c6;font-size:.9rem;margin-top:18px}
+
+  /* Problem cards */
+  .grid{display:grid;gap:22px}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 24px;height:100%;
+  }
+  .card .num{
+    display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;
+    border-radius:10px;background:var(--bg-soft);color:var(--accent);font-weight:800;margin-bottom:14px;
+  }
+  .card h3{font-size:1.12rem;margin-bottom:8px}
+  .card p{font-size:.97rem}
+  .center{text-align:center;max-width:62ch;margin:0 auto 48px}
+
+  /* Avant / Après */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .ba-col{border-radius:var(--radius);padding:30px 28px}
+  .ba-before{background:#fff;border:1px solid var(--line)}
+  .ba-after{background:var(--navy);color:#fff}
+  .ba-col h3{margin-bottom:18px;font-size:1.2rem}
+  .ba-after h3{color:#fff}
+  .ba-col ul{list-style:none}
+  .ba-col li{position:relative;padding-left:30px;margin-bottom:14px;font-size:1rem}
+  .ba-before li{color:var(--muted)}
+  .ba-after li{color:#dbe6f2}
+  .ba-col li::before{position:absolute;left:0;top:-1px;font-weight:800}
+  .ba-before li::before{content:"\2717";color:#c0492f}
+  .ba-after li::before{content:"\2713";color:var(--accent)}
+
+  /* About */
+  .about{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+  .about .photo{
+    border-radius:var(--radius);background:linear-gradient(160deg,var(--navy),var(--navy-2));
+    aspect-ratio:4/5;display:flex;align-items:flex-end;padding:26px;color:#fff;position:relative;overflow:hidden;
+  }
+  .about .photo::after{content:"";position:absolute;right:-60px;bottom:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,122,26,.25),transparent 70%)}
+  .about .photo .tag{font-weight:700;font-size:1.05rem;position:relative;z-index:1}
+  .about .photo .tag small{display:block;color:#9fb2c6;font-weight:500;margin-top:6px}
+  .about p{margin-bottom:16px;font-size:1.05rem}
+
+  /* Services */
+  .service{display:flex;gap:16px;align-items:flex-start}
+  .service .ic{
+    flex:0 0 46px;width:46px;height:46px;border-radius:12px;background:var(--navy);
+    color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;
+  }
+  .service h3{font-size:1.12rem;margin-bottom:6px}
+  .service p{font-size:.97rem}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden}
+  summary{
+    cursor:pointer;list-style:none;padding:20px 22px;font-weight:700;color:var(--navy);
+    display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:1.05rem;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--accent);font-size:1.5rem;font-weight:700;line-height:1}
+  details[open] summary::after{content:"\2013"}
+  details p{padding:0 22px 22px;font-size:1rem}
+
+  /* CTA + form */
+  .cta{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff}
+  .cta h2{color:#fff}
+  .cta .center p{color:#cdd9e6}
+  form{max-width:640px;margin:0 auto;background:#fff;border-radius:var(--radius);padding:32px 30px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-weight:600;color:var(--navy);margin-bottom:6px;font-size:.95rem}
+  .field input,.field textarea{
+    width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:1rem;color:var(--ink);background:#fcfdff;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,122,26,.15)}
+  .field textarea{min-height:90px;resize:vertical}
+  form .btn{width:100%;text-align:center}
+
+  /* Footer */
+  footer{background:var(--navy);color:#9fb2c6;padding:40px 0;font-size:.92rem}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .foot .brand{color:#fff}
+
+  /* Responsive */
+  @media(max-width:900px){
+    .grid-4{grid-template-columns:repeat(2,1fr)}
+    .about{grid-template-columns:1fr;gap:28px}
+    .about .photo{aspect-ratio:16/10;max-width:420px}
+  }
+  @media(max-width:640px){
+    section{padding:60px 0}
+    .hero{padding:64px 0 70px}
+    .grid-4,.grid-2,.ba{grid-template-columns:1fr}
+    .nav .brand{font-size:.95rem}
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .hero-actions .btn{text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">Christophe Lachaud<span>.</span></a>
+    <a href="#contact" class="btn">Appel gratuit</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Pour les dirigeants de TPE du BTP</span>
+    <h1>Reprenez le contrôle de votre temps. Laissez l'administratif tourner sans vous.</h1>
+    <p class="lead">Je structure vos opérations et j'automatise les tâches qui vous bouffent les soirées : devis, relances, factures, reporting. Avec des systèmes simples et de l'IA. Vous vous concentrez sur votre métier, le reste tourne tout seul.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn">Réserver un appel gratuit</a>
+      <a href="#solution" class="btn btn-ghost">Voir comment</a>
+    </div>
+    <p class="hero-note">27 ans de terrain dans le bâtiment et les travaux publics. Je connais votre métier.</p>
+  </div>
+</section>
+
+<!-- PROBLÈME -->
+<section id="probleme">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Le problème</span>
+      <h2>Vous reconnaissez ça ?</h2>
+    </div>
+    <div class="grid grid-4">
+      <div class="card">
+        <span class="num">1</span>
+        <h3>Vos soirées y passent</h3>
+        <p>Devis à relancer, factures à suivre, mails en retard. La gestion vous prend le temps que vous devriez passer sur le terrain ou avec votre famille.</p>
+      </div>
+      <div class="card">
+        <span class="num">2</span>
+        <h3>Le chantier avance, le suivi non</h3>
+        <p>Le planning est dans votre tête, les infos éparpillées entre SMS, papiers et appels. Rien n'est centralisé, tout repose sur vous.</p>
+      </div>
+      <div class="card">
+        <span class="num">3</span>
+        <h3>L'argent reste sur la table</h3>
+        <p>Devis sans réponse, paiements en retard : faute de relances suivies, vous perdez du chiffre d'affaires sans même le voir.</p>
+      </div>
+      <div class="card">
+        <span class="num">4</span>
+        <h3>L'IA pourrait aider, mais...</h3>
+        <p>Vous savez que les bons outils vous feraient gagner du temps. Mais vous n'avez ni le temps ni l'envie de vous y plonger seul.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION (Avant / Après) -->
+<section class="section-soft" id="solution">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">La solution</span>
+      <h2>Avant / Après</h2>
+      <p>Concrètement, voilà ce qui change dans votre quotidien quand on travaille ensemble.</p>
+    </div>
+    <div class="ba">
+      <div class="ba-col ba-before">
+        <h3>Aujourd'hui, sans moi</h3>
+        <ul>
+          <li>Devis et relances gérés à la main, quand vous y pensez</li>
+          <li>Infos chantier éparpillées (SMS, papiers, mémoire)</li>
+          <li>Reporting inexistant, ou bricolé le dimanche soir</li>
+          <li>Vous êtes le seul point de passage : rien n'avance sans vous</li>
+        </ul>
+      </div>
+      <div class="ba-col ba-after">
+        <h3>Demain, avec moi</h3>
+        <ul>
+          <li>Relances de devis et de factures automatiques</li>
+          <li>Un seul tableau de bord pour chantiers, clients et paiements</li>
+          <li>Reporting à jour en temps réel, généré tout seul</li>
+          <li>Des process clairs : ça tourne même quand vous n'êtes pas là</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="wrap about">
+    <div class="photo">
+      <div class="tag">Christophe Lachaud
+        <small>Périgueux (24) — Bâtiment, TP & systèmes</small>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow">Qui je suis</span>
+      <h2>Je connais votre galère. Je l'ai vécue.</h2>
+      <p>J'ai passé 27 ans dans le bâtiment et les travaux publics : génie civil, VRD, fonction publique territoriale. Je connais chaque galère administrative d'un chantier, parce que je les ai faites moi-même.</p>
+      <p>Aujourd'hui, je mets cette expérience au service des dirigeants de TPE du BTP : je structure leurs opérations et j'automatise tout ce qui peut l'être, pour qu'ils récupèrent leur temps et leur sérénité.</p>
+      <p>Pas de jargon, pas d'usine à gaz. Des systèmes simples qui marchent, pensés par quelqu'un qui connaît le terrain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section-soft" id="services">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Mes services</span>
+      <h2>Ce que je fais concrètement pour vous</h2>
+    </div>
+    <div class="grid grid-2">
+      <div class="service">
+        <div class="ic">IA</div>
+        <div>
+          <h3>Automatisation &amp; IA</h3>
+          <p>Devis, relances, factures, reporting : j'automatise les tâches répétitives avec des outils simples et de l'IA. Vous gagnez des heures chaque semaine.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="ic">GP</div>
+        <div>
+          <h3>Structuration &amp; gestion de projet</h3>
+          <p>Je remets de l'ordre dans vos opérations : process clairs, suivi de chantier centralisé, coordination des équipes et des prestataires.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="ic">⚙</div>
+        <div>
+          <h3>Mise en place d'outils</h3>
+          <p>Tableau de bord, suivi clients, facturation électronique (obligatoire dès septembre). Les bons outils, configurés et pris en main, sans prise de tête.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="ic">→</div>
+        <div>
+          <h3>Accompagnement au démarrage</h3>
+          <p>Un audit de vos points de friction et un plan d'action concret. On commence petit, on prouve les résultats, on étend.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">FAQ</span>
+      <h2>Les questions qu'on me pose</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>C'est quoi exactement, un OBM ?</summary>
+        <p>En clair, je suis votre bras droit opérationnel. Je gère et j'automatise tout ce qui tourne autour de votre activité (admin, outils, suivi, coordination) pour que vous restiez concentré sur votre métier.</p>
+      </details>
+      <details>
+        <summary>Je suis une petite structure, c'est pour moi ?</summary>
+        <p>Oui. Je travaille spécifiquement avec les TPE du BTP. Plus vous êtes petit, plus chaque heure gagnée compte.</p>
+      </details>
+      <details>
+        <summary>Combien ça coûte ?</summary>
+        <p>Ça dépend de vos besoins. On démarre toujours par un appel gratuit pour cerner vos points de friction, puis je vous propose une formule claire, sans mauvaise surprise.</p>
+      </details>
+      <details>
+        <summary>Je ne suis pas à l'aise avec la technique ou l'IA.</summary>
+        <p>C'est justement mon rôle. Vous n'avez rien à apprendre : je mets en place, je configure, et je vous montre l'essentiel. Simple et utilisable au quotidien.</p>
+      </details>
+      <details>
+        <summary>En combien de temps je vois des résultats ?</summary>
+        <p>Les premières automatisations (relances, suivi) sont en place en quelques semaines. L'objectif : vous faire gagner du temps dès le premier mois.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA + FORMULAIRE -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Parlons-en</span>
+      <h2>Parlons de votre situation.</h2>
+      <p>15 minutes pour identifier ce qui vous fait perdre le plus de temps, et comment le régler. Gratuit, sans engagement.</p>
+    </div>
+    <form action="#" method="post" onsubmit="alert('Merci ! Connectez ce formulaire à votre email ou outil de prise de rendez-vous.');return false;">
+      <div class="field">
+        <label for="nom">Nom</label>
+        <input id="nom" name="nom" type="text" required>
+      </div>
+      <div class="field">
+        <label for="entreprise">Entreprise</label>
+        <input id="entreprise" name="entreprise" type="text">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required>
+      </div>
+      <div class="field">
+        <label for="tel">Téléphone</label>
+        <input id="tel" name="tel" type="tel">
+      </div>
+      <div class="field">
+        <label for="galere">Votre plus grosse galère admin du moment ?</label>
+        <textarea id="galere" name="galere"></textarea>
+      </div>
+      <button type="submit" class="btn">Réserver mon appel gratuit</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#top" class="brand">Christophe Lachaud<span style="color:var(--accent)">.</span></a>
+    <span>OBM pour le BTP — Périgueux, Dordogne · &copy; 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 # Prompt : Site vitrine OBM
 
 > Prompt à coller dans Claude pour générer le site vitrine de Christophe Lachaud, OBM freelance.
-> Objectif : convaincre des dirigeants de TPE/PME et créateurs de contenu de réserver un appel découverte.
+> Objectif : convaincre un dirigeant de TPE du BTP de réserver un appel découverte.
 
 ---
 
@@ -10,27 +10,33 @@
 Tu vas créer un site vitrine complet pour un OBM (Online Business Manager) freelance.
 
 --- QUI JE SUIS ---
-Je m'appelle Christophe Lachaud, basé à Périgueux (Dordogne). J'ai 47 ans,
-15 ans d'expérience en gestion de projets terrain (VRD, bâtiment, génie civil,
-fonction publique). Je me lance comme OBM freelance pour accompagner des TPE/PME,
-dirigeants et créateurs de contenu dans la gestion de leurs opérations, projets
-et outils.
+Je m'appelle Christophe Lachaud, basé à Périgueux (Dordogne). J'ai 47 ans et
+27 ans d'expérience dans le bâtiment et les travaux publics (génie civil, VRD,
+fonction publique territoriale). Je me lance comme OBM freelance, spécialisé
+dans l'accompagnement des dirigeants de TPE du BTP : je structure leurs
+opérations et j'automatise les tâches chronophages avec des systèmes simples
+et de l'IA.
 
---- MES CIBLES ---
-- Dirigeants de TPE/PME débordés qui ont besoin de quelqu'un pour structurer
-  et piloter leurs opérations
-- Créateurs de contenu qui veulent déléguer la gestion de leur business
-- Secteurs d'intérêt : événementiel, sport/bien-être, BTP, salle de sport
+--- MA CIBLE (UNIQUE) ---
+- Dirigeants de TPE du BTP, débordés par l'administratif et la coordination,
+  qui veulent récupérer du temps et reprendre le contrôle de leur activité.
+- Pas de créateurs de contenu, pas de multi-secteurs : le BTP est le terrain
+  de lancement assumé (crédibilité terrain + marché sous-digitalisé).
 
---- CE QUE JE PROPOSE ---
-- Gestion de projets et d'opérations
-- Mise en place et gestion d'outils (Notion, Trello, Airtable, etc.)
-- Structuration des processus internes
-- Suivi et reporting pour les dirigeants
-- Coordination d'équipes et de prestataires
+--- CE QUE JE PROPOSE (signature : structurer ET automatiser) ---
+- Automatisation & IA : devis, relances, factures, reporting (gain de temps direct)
+- Structuration & gestion de projet : process clairs, suivi de chantier centralisé,
+  coordination des équipes et prestataires
+- Mise en place d'outils : tableau de bord, suivi clients, facturation électronique
+- Accompagnement au démarrage : audit des points de friction + plan d'action concret
+
+--- ANGLE / HISTOIRE (à mettre en avant pour la crédibilité) ---
+"J'ai passé 27 ans dans le bâtiment et les travaux publics. Je connais chaque
+galère administrative d'un chantier. Aujourd'hui, je les fais disparaître pour
+les autres."
 
 --- OBJECTIF DU SITE ---
-Convaincre un dirigeant ou créateur de contenu de me contacter pour un premier
+Convaincre un dirigeant de TPE du BTP de me contacter pour un premier
 appel découverte. Le site doit répondre à une seule question dans la tête du
 visiteur : "Est-ce que cette personne peut vraiment m'aider ?"
 

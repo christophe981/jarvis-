@@ -7,6 +7,26 @@
 
 ---
 
+## 2026-07-14
+
+### Création de l'architecture OBM-OS
+- Mise en place d'OBM-OS, système d'organisation et d'assistance IA dédié à l'activité d'OBM, en complément de Jarvis (sans le remplacer)
+- Fichier OBM-OS.md créé à la racine : rôle du système, principes, composants, règle de classement, protection des données clients, ordre de développement
+- Arborescence créée : knowledge/, templates/, sop/, clients/, labs/ et .claude/agents/, avec leurs sous-dossiers
+- Aucun fichier existant modifié ou supprimé (CLAUDE.md, context/, commands/, skills/ préservés)
+- Cinq sous-agents prévus (operations, sales, marketing, automation, business), aucun créé pour l'instant
+- Prochaine étape recommandée : agent Operations
+
+## 2026-07-08
+
+### Pilotage BTP : Factures, Relances automatiques et refonte visuelle
+- Devis (export PDF) et abonnement Stripe (29€/mois) construits et déployés
+- Refonte visuelle via Claude Design, inspirée de concurrents réels (pilotagebtp.com) : sidebar, couleurs, mise en page des écrans
+- Factures et paiements : conversion d'un devis accepté en facture, enregistrement de paiements, statuts automatiques
+- Relances automatiques : emails via Brevo pour devis sans réponse et factures en retard, cron quotidien, historique dans l'appli
+- Appli fonctionnelle de bout en bout et déployée en production, reste reporting et finition avant le lancement publicitaire
+- En cours : finalisation visuelle supplémentaire dans Claude Design (photos de chantier, illustrations, bouton WhatsApp)
+
 ## 2026-07-05
 
 ### Démarrage du MVP "Pilotage BTP" et clarification du modèle économique

@@ -11,7 +11,13 @@
       "mcp__9291e5b4-5cca-4450-8093-9158f8d94e1b__generate-design",
       "mcp__9291e5b4-5cca-4450-8093-9158f8d94e1b__create-design-from-candidate",
       "mcp__9291e5b4-5cca-4450-8093-9158f8d94e1b__export-design",
-      "mcp__scheduled-tasks__list_scheduled_tasks"
+      "mcp__scheduled-tasks__list_scheduled_tasks",
+      "Read(//c/Users/lacha/Downloads/jarvis-starter-kit/**)",
+      "Bash(cat .gitignore)",
+      "Bash(find . -name \"*.env*\" -not -path \"*/node_modules/*\")",
+      "Bash(find . -name \".gitignore\" -not -path \"*/node_modules/*\")",
+      "Bash(grep -vE './\\\\.git\\(/|$\\)')",
+      "Bash(cd \"C:/Users/lacha/Downloads/jarvis-starter-kit\" && \\\\ *)"
     ]
   }
 }

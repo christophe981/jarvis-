@@ -67,7 +67,7 @@ Liste des projets ou chantiers actifs sur lesquels je veux que Claude m'aide :
 - Décliner l'offre détaillée (formules, prix) à partir du positionnement clarifié (BTP + auto/IA + gestion de projet)
 - Devenir expert en prospection (LinkedIn, Instagram, mon site)
 - Monter en compétence sur la vente, le marketing, les calls et les interviews
-- Construire "Pilotage BTP" (nom de travail), le SaaS destiné à être vendu en ligne aux dirigeants de TPE du BTP : dashboard unifié, devis/relances automatisées, suivi de chantier. En cours de développement avec Claude (Next.js + Supabase + Vercel), Phase 1 sur 7 en cours. Ex-idée vague "créer une application sport ou BTP à terme", devenue un chantier concret et prioritaire
+- Construire "Pilotage BTP" (nom de travail), le SaaS destiné à être vendu en ligne aux dirigeants de TPE du BTP : dashboard unifié, devis/relances automatisées, suivi de chantier. Développé avec Claude (Next.js + Supabase + Vercel) : authentification, clients/chantiers, devis avec export PDF, abonnement Stripe, factures/paiements et relances automatiques par email (Brevo) sont construits, testés et déployés en production sur pilotage-btp.vercel.app. Refonte visuelle en cours via Claude Design (inspirée de concurrents réels type pilotagebtp.com), reste le reporting et la finition avant le lancement publicitaire. Ex-idée vague "créer une application sport ou BTP à terme", devenue un chantier concret et prioritaire
 
 ---
 
