@@ -64,29 +64,40 @@ Une fois que je confirme, Claude met à jour le fichier en question et ajoute un
 
 ```
 .
-├── CLAUDE.md                    # Ce fichier, chargé à chaque session
+├── CLAUDE.md                    # Ce fichier, chargé à chaque session (fondation Jarvis)
+├── OBM-OS.md                    # Fondation du système de travail OBM-OS
+├── AGENTS.md                    # Vue lisible de mon équipe d'agents IA
 ├── context/
 │   ├── CONTEXT.md               # Qui je suis, ce que je fais, mes objectifs
 │   ├── HISTORY.md               # Journal évolutif de mes sessions
 │   └── import/                  # Documents externes à analyser
 ├── .claude/
-│   ├── commands/
-│   │   ├── prime.md             # /prime pour démarrer une session
-│   │   ├── update.md            # /update pour mettre à jour le contexte
-│   │   └── morning.md           # /morning pour démarrer la journée
-│   └── skills/
-│       └── recherche-actualites/ # Skill veille personnalisée
-└── module-installs/
-    └── jarvis-install/          # Module d'installation initial
+│   ├── agents/                  # Sous-agents spécialisés (à construire progressivement)
+│   ├── commands/                # /prime, /update, /morning
+│   ├── skills/                  # Skills (super-pouvoirs) de mon Jarvis
+│   └── module-installs/         # Module d'installation initial
+├── knowledge/                   # Connaissances, formations et méthodes de référence
+├── templates/                   # Documents modèles à personnaliser
+├── sop/                         # Procédures opérationnelles standard
+├── clients/                     # Contexte propre à chaque client (+ _modele-client/)
+└── labs/                        # Idées, tests et brouillons non validés
 ```
+
+Le détail complet du rôle de chaque dossier (knowledge, templates, sop, clients, labs, agents) et la règle de classement sont décrits dans `OBM-OS.md`.
 
 | Dossier | Utilité |
 |---------|---------|
 | `context/` | Tout ce qui me concerne et que Claude doit savoir |
 | `context/import/` | Documents externes (PDFs, exports, notes) à analyser |
+| `.claude/agents/` | Sous-agents spécialisés de mon OBM-OS |
 | `.claude/commands/` | Commandes personnalisées de mon Jarvis |
 | `.claude/skills/` | Skills (super-pouvoirs) de mon Jarvis |
-| `module-installs/` | Modules d'installation (initial et futurs) |
+| `.claude/module-installs/` | Modules d'installation (initial et futurs) |
+| `knowledge/` | Connaissances et contenus de formation (dont OBM Elite) |
+| `templates/` | Modèles de documents à remplir ou adapter |
+| `sop/` | Procédures à suivre, étape par étape |
+| `clients/` | Un dossier par client, données cloisonnées |
+| `labs/` | Idées et expérimentations non validées |
 
 ---
 

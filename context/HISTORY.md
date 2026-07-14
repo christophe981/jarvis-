@@ -17,6 +17,23 @@
 - Cinq sous-agents prévus (operations, sales, marketing, automation, business), aucun créé pour l'instant
 - Prochaine étape recommandée : agent Operations
 
+### Fichier AGENTS.md et rangement du workspace
+- Création de AGENTS.md à la racine : vue lisible de l'équipe IA (Operations, Sales, Marketing, Automation, Business, Knowledge Manager) avec rôle, futur fichier technique et statut de chacun
+- Rangement Git : correction du dossier .claude imbriqué en double (settings.local.json remis à l'emplacement standard), validation de tout le travail en attente, arbre propre
+- Regroupement visuel des fichiers racine dans VS Code via .vscode/settings.json (file nesting), purement cosmétique
+
+### Skill devis-proposition-commerciale : correction du fonctionnement Gmail
+- Diagnostic : la connexion Gmail et la création de brouillon fonctionnent (test de brouillon réussi). Seule limite réelle : l'outil Gmail ne permet pas la pièce jointe automatique
+- Skill mis à jour : méthode par défaut = brouillon texte auto + PDF téléchargés puis glissés à la main dans Gmail avant envoi (liens Canva gardés en secours)
+- Clarification comprise : le skill tourne sur Claude.ai (cloud), les PDF doivent être téléchargés vers le dossier Téléchargements du PC pour être joints
+- Copie versionnée du skill ajoutée dans .claude/skills/ (sauvegarde visible dans VS Code, distincte de la version active sur Claude.ai)
+
+### Première ressource Knowledge : méthode d'offre OBM Elite
+- Analyse et classement d'une page Notion "Offre" (principes + échelle de valeur) reçue par copier-coller
+- Décision de classement : Knowledge (méthode de référence), rangée dans knowledge/obm-elite/methode-offre-echelle-de-valeur.md
+- Contenu reformulé au ton de Christophe (première personne), orthographe et formulations nettoyées, fond et chiffres inchangés
+- Sert de fondation aux futurs templates offres/roadmaps/win-win
+
 ## 2026-07-08
 
 ### Pilotage BTP : Factures, Relances automatiques et refonte visuelle
