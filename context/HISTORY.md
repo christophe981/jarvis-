@@ -34,6 +34,15 @@
 - Contenu reformulé au ton de Christophe (première personne), orthographe et formulations nettoyées, fond et chiffres inchangés
 - Sert de fondation aux futurs templates offres/roadmaps/win-win
 
+### Ingestion des premiers modules OBM Elite dans OBM-OS
+- Méthode de lecture des pages Notion établie : passage par le navigateur Chrome connecté (l'intégration Notion MCP ne voit qu'une seule page partagée), lecture directe des pages, toggles dépliés au besoin
+- Traitement module par module, validé un par un : analyse, classement, emplacement, réécriture au ton de Christophe
+- Nouvelles ressources créées et commitées :
+  - sop/clients : checklist méthode des offres (procédure de livraison, consulting + 30 jours)
+  - templates/onboarding : version cochable par client de cette checklist
+  - templates/interviews : structure de closing "Prescription"
+  - templates/prospection : messages d'invitation à une interview découverte
+
 ## 2026-07-08
 
 ### Pilotage BTP : Factures, Relances automatiques et refonte visuelle
