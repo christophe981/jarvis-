@@ -7,6 +7,16 @@
 
 ---
 
+## 2026-07-16
+
+### Lecture du CheckOps Template OBM Elite et création du skill checkops-client
+- Lecture complète du CheckOps (Template) (2) via Chrome : page principale + 7 sous-pages (Questionnaire Onboarding, Vision, Audit productivité, Flux de revenus, L'Essentiel, Product/market fit, Roadmap)
+- Création de 8 fichiers templates vierges dans templates/checkops/ (00-index à 08-roadmap)
+- Création du skill .claude/skills/checkops-client/SKILL.md : génère le dossier clients/[slug]/checkops/ avec tous les documents pré-remplis au nom du client quand on dit "prépare le CheckOps pour [prénom] [nom]"
+- Retrouvé dans le transcript de session du 14/07 : 6 modules OBM Elite restants à intégrer (Offre, La méthode OBM Squad, Parcours Client, Call Stratégique, Systèmes/Process, L'Essentiel)
+
+---
+
 ## 2026-07-14
 
 ### Création de l'architecture OBM-OS
