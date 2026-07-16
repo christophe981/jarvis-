@@ -13,7 +13,15 @@
 - Lecture complète du CheckOps (Template) (2) via Chrome : page principale + 7 sous-pages (Questionnaire Onboarding, Vision, Audit productivité, Flux de revenus, L'Essentiel, Product/market fit, Roadmap)
 - Création de 8 fichiers templates vierges dans templates/checkops/ (00-index à 08-roadmap)
 - Création du skill .claude/skills/checkops-client/SKILL.md : génère le dossier clients/[slug]/checkops/ avec tous les documents pré-remplis au nom du client quand on dit "prépare le CheckOps pour [prénom] [nom]"
-- Retrouvé dans le transcript de session du 14/07 : 6 modules OBM Elite restants à intégrer (Offre, La méthode OBM Squad, Parcours Client, Call Stratégique, Systèmes/Process, L'Essentiel)
+- Retrouvé dans le transcript de session du 14/07 : 6 modules OBM Elite restants à intégrer (Offre, La méthode OBM Squad, Parcours Client, Call Stratégique, Systèmes/Process, L'Essentiel). Correction ensuite : "Offre" déjà intégrée le 14/07, il reste 4 modules (La méthode OBM Squad, Parcours Client, Call Stratégique, Systèmes/Process)
+
+### Template restitution/prescription et tarif de référence OBM
+- Analyse d'un modèle de restitution reçu (PDF Abracaméra de Karl Jourdain, confrère OBM) : validé qu'une restitution peut servir de prescription en même temps (structure Prescription OBM Elite)
+- Création de templates/restitutions/restitution-prescription_structure-slides.md : document unique en 15 slides (POURQUOI/QUOI/COMMENT/MAINTENANT), au nom de Christophe, avec placeholders [CLIENT]
+- Adaptation à la vision de Christophe : Phase 1 = Intensive 30 jours (vraie structure OBM Elite), Phase 2 = prolongation 60 jours au même tarif
+- Tarif de référence fixé et documenté dans knowledge/obm-elite/tarifs-reference.md : 2 650 €/mois, soit 7 950 € la mission complète (3 mois)
+- Coordonnées OBM ajoutées au template : 07 62 00 86 19, contact@christophe-obm.com (LinkedIn à compléter)
+- Skill devis corrigé : consigne de police lisible (>= 15px) pour le corps des emails Gmail (l'email test avait une écriture trop petite)
 
 ---
 

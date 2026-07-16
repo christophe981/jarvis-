@@ -37,7 +37,7 @@ Mon parcours : 2 ans en restauration, 12 ans en bâtiment / génie civil, 15 ans
 - Secteur de lancement (tête de pont) : le BTP, pour la crédibilité immédiate (27 ans bâtiment/TP) et le cash rapide. Logique beachhead : démarrer en BTP, prouver le modèle, puis pivoter vers un secteur plus désiré.
 - Modèle économique : auto-entreprise (création en cours avec Me Camille Pipelier), régime BNC, versement forfaitaire libératoire 2,2 %, franchise en base de TVA (seuil 41 250 €), plafond CA 77 700 €
 - Outil de facturation prévu : Conto (facturation électronique obligatoire dès septembre 2026)
-- Statut de l'offre : positionnement clarifié, textes du site et formules détaillées en cours
+- Statut de l'offre : positionnement clarifié, textes du site en cours. Formule d'accompagnement définie : Intensive 30 jours puis prolongation 60 jours, au tarif de référence de 2 650 euros/mois (7 950 euros la mission complète sur 3 mois)
 - Depuis le 02/07/2026 : le modèle économique s'élargit à deux volets. (1) Service OBM classique, contrats sur mesure avec les clients pilotes. (2) Produit SaaS ("Pilotage BTP", nom de travail) vendu directement en ligne, acquisition prévue par publicité payante sur les réseaux sociaux en lien avec le site vitrine, inscription 100 % self-service. Les deux volets coexistent : les clients pilotes restent facturés manuellement, le canal publicitaire est pensé pour scaler sans intervention manuelle.
 
 ---
