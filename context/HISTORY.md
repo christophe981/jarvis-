@@ -7,6 +7,31 @@
 
 ---
 
+## 2026-07-18
+
+### Modèle de restitution/prescription façon Karl Jourdain
+- Reproduction fidèle du modèle de restitution de Karl (Abracaméra) en .pptx à importer dans Canva : fond blanc, triangle bleu clair en coin, titre à emoji, deux cadres à bordure, cercle saumon pour le verbatim, encadré "À RETENIR", pied de page
+- 15 slides mappées sur la structure validée (POURQUOI / QUOI / COMMENT / MAINTENANT), avec l'offre Intensive 30j + prolongation 60j et le tarif 2 650 €/mois (7 950 €) intégrés
+- Fichier de référence : templates/restitutions/restitution-prescription_modele-karl.pptx
+- Plusieurs passes d'agrandissement du texte (bullets 18pt, verbatim 26pt, contenu centré) jusqu'à validation du confort de lecture. Rendu vérifié via import Canva (ni LibreOffice ni PowerPoint en local)
+
+### Corrections de lisibilité de la proposition commerciale
+- Design de référence Canva DAHPSZ9nUF8 : corps de texte agrandi (16 puis 18px), page 3 dense maintenue à 16px pour éviter le chevauchement avec les images
+- Plafond de lisibilité de la maquette A4 atteint et expliqué : au-delà, il faut alléger le texte, pas juste grossir la police
+
+### Cas fictif Julien Marchand : démonstration complète du process
+- Prospect fictif créé (Marchand Rénovation, maçonnerie/rénovation, dirigeant devenu goulot d'étranglement de sa boîte) pour remplir les modèles de bout en bout
+- Restitution remplie : labs/restitution_exemple-marchand-renovation.pptx
+- Proposition commerciale personnalisée sur une copie du design (Canva DAHPvRJ74K8), design de référence laissé intact
+- Devis chiffré créé en A4 navy/orange (tableau Phase 1 + Phase 2, net à payer 7 950 €) : labs/devis_exemple-marchand-renovation.pptx
+
+### Décision stratégique : flux de vente à 2 documents
+- Rôle clarifié de chaque pièce : la restitution/prescription est l'outil de vente complet (diagnostic + offre + prix + closing), présentée en live ; le devis est le document à signer
+- La proposition commerciale fait doublon avec la restitution : sortie du flux courant, gardée en réserve pour les ventes sans présentation live
+- Process standard retenu : Call découverte, puis Restitution en visio, puis Devis à signer
+
+---
+
 ## 2026-07-16
 
 ### Lecture du CheckOps Template OBM Elite et création du skill checkops-client
