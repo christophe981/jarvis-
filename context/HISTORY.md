@@ -30,6 +30,12 @@
 - La proposition commerciale fait doublon avec la restitution : sortie du flux courant, gardée en réserve pour les ventes sans présentation live
 - Process standard retenu : Call découverte, puis Restitution en visio, puis Devis à signer
 
+### Règle technique : le devis reste en PDF, jamais dans Canva
+- Constat à l'usage : Canva abîme les tableaux à l'import PowerPoint (espaces mangés entre les mots, en-têtes de colonne déplacés). Le devis, qui contient un tableau, devient illisible après import Canva
+- Règle retenue : la restitution passe par Canva (pas de tableau), le devis reste en PDF généré depuis le .pptx avec LibreOffice, sans jamais passer par Canva
+- LibreOffice installé sur la machine ce jour : permet la conversion .pptx vers PDF et l'aperçu des rendus en local
+- Détail et procédure : templates/devis/README.md
+
 ---
 
 ## 2026-07-16
