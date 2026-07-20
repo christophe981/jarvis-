@@ -32,7 +32,7 @@ Mon parcours : 2 ans en restauration, 12 ans en bâtiment / génie civil, 15 ans
 
 **Activité freelance (indépendant en lancement) :**
 - Activité : OBM (Online Business Manager), avec une signature claire : structurer ET automatiser
-- Positionnement (depuis le 30/06/2026) : aider les dirigeants de TPE débordés à reprendre le contrôle de leur temps grâce à l'automatisation, l'IA et une gestion de projet carrée
+- Positionnement (raffiné le 20/07/2026) : accompagner des dirigeants qui ont déjà une activité solide, une équipe et une organisation existantes, mais qui ont besoin de clarifier leurs rôles, leurs processus, leurs priorités et leur pilotage pour soutenir leur croissance. (Remplace l'ancien angle "aider les dirigeants de TPE débordés à reprendre le contrôle de leur temps", du 30/06/2026 : on passe de sauver un dirigeant qui coule à structurer un dirigeant qui monte.)
 - Niche = un service (auto/IA + gestion de projet), pas un secteur. Compétences horizontales, transférables.
 - Secteur de lancement (tête de pont) : le BTP, pour la crédibilité immédiate (27 ans bâtiment/TP) et le cash rapide. Logique beachhead : démarrer en BTP, prouver le modèle, puis pivoter vers un secteur plus désiré.
 - Modèle économique : auto-entreprise (création en cours avec Me Camille Pipelier), régime BNC, versement forfaitaire libératoire 2,2 %, franchise en base de TVA (seuil 41 250 €), plafond CA 77 700 €

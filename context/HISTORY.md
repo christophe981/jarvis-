@@ -7,6 +7,15 @@
 
 ---
 
+## 2026-07-20
+
+### Raffinement du positionnement : de "dirigeant débordé" à "dirigeant qui structure sa croissance"
+- Nouvelle cible adoptée : accompagner des dirigeants qui ont déjà une activité solide, une équipe et une organisation existantes, mais qui ont besoin de clarifier leurs rôles, leurs processus, leurs priorités et leur pilotage pour soutenir leur croissance
+- Remplace l'ancien angle du 30/06/2026 ("aider les dirigeants de TPE débordés à reprendre le contrôle de leur temps"). Bascule de la douleur "je coule, sauve-moi" vers "je monte, structure-moi"
+- Cohérent avec la signature "structurer ET automatiser". Point de vigilance noté : cette cible s'appuie moins sur l'accroche "je connais la galère du dirigeant seul par cœur"
+
+---
+
 ## 2026-07-18
 
 ### Modèle de restitution/prescription façon Karl Jourdain
