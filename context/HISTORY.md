@@ -7,6 +7,15 @@
 
 ---
 
+## 2026-07-21
+
+### Deux nouveaux skills OBM-OS : fiche-client-base et evaluation-flux-revenus
+- Skill fiche-client-base créé : peuple clients/_modele-client/ (CLIENT.md, objectifs, contacts, outils, decisions, roadmap, reunions/, livrables/) prévu par OBM-OS.md mais jamais rempli, puis le copie et le complète pour chaque nouveau client
+- Skill evaluation-flux-revenus créé : anime en direct le module OBM Elite "Évaluation des flux de revenus" avec un client (collecte des offres une à une, calcule CA total et %, rédige analyse et recommandations à valider), écrit dans clients/[slug]/checkops/04-flux-revenus.md, complémentaire à checkops-client
+- Les deux skills restent indépendants de checkops-client et weekly-plan-client-notion, par choix explicite (pas de fusion ni d'orchestration automatique)
+
+---
+
 ## 2026-07-20
 
 ### Raffinement du positionnement : de "dirigeant débordé" à "dirigeant qui structure sa croissance"
