@@ -274,7 +274,7 @@ J'accompagne les dirigeants dans la structuration, la coordination et l'optimisa
 
 Tél : 07 62 00 86 19
 Mail : contact@christophe-obm.com
-LinkedIn : [À COMPLÉTER]
+LinkedIn : https://www.linkedin.com/in/christophe-lachaud-obm/
 
 MERCI !
 
