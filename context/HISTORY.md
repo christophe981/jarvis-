@@ -9,6 +9,11 @@
 
 ## 2026-07-21
 
+### Import de l'exemple de positionnement "méthode 3S" (OBM Elite)
+- PDF "Présentation (Exemple).pdf" importé : pitch POURQUOI/QUOI/COMMENT/MAINTENANT avec une méthode nommée "3S" (Simplifier/Systématiser/Scaler) et une offre d'entrée "Atelier Clarté" à 2 500 € HT (atelier 2h, construction 7j, restitution 1h30)
+- Archive brute dans context/import/2026-07-21-presentation-exemple-methode-3s.md, version classée en connaissance dans knowledge/obm-elite/methode-3s-exemple-positionnement.md
+- Point noté : la logique Simplifier/Systématiser/Scaler recoupe le positionnement "dirigeant qui structure sa croissance" adopté le 20/07/2026, confirmation externe du narratif. Piste ouverte (non tranchée) : nommer ma propre méthode dans la partie COMMENT de ma restitution
+
 ### Deux nouveaux skills OBM-OS : fiche-client-base et evaluation-flux-revenus
 - Skill fiche-client-base créé : peuple clients/_modele-client/ (CLIENT.md, objectifs, contacts, outils, decisions, roadmap, reunions/, livrables/) prévu par OBM-OS.md mais jamais rempli, puis le copie et le complète pour chaque nouveau client
 - Skill evaluation-flux-revenus créé : anime en direct le module OBM Elite "Évaluation des flux de revenus" avec un client (collecte des offres une à une, calcule CA total et %, rédige analyse et recommandations à valider), écrit dans clients/[slug]/checkops/04-flux-revenus.md, complémentaire à checkops-client
