@@ -7,6 +7,17 @@
 
 ---
 
+## 2026-07-30
+
+### Méthode de diagnostic IA et skill diagnostic-ia-client
+- Transformation d'un PDF source ("Savoir lire une entreprise avant de lui vendre de l'IA") en méthode Jarvis opérationnelle : 6 grilles dans knowledge/operations/audit-ia/ (maturité, contexte métier, sensibilité des données, automatisabilité, choix d'outil/modèle, ROI et priorisation), orchestrées par 00-methode-principale.md
+- Checklists transversales dans sop/operations/audit-ia/ (pièges projets IA, suivi post-mission) et templates vierges dans templates/diagnostic-ia/ (rapport de diagnostic, fiche contexte métier, calcul ROI, charte IA une page)
+- Skill diagnostic-ia-client créé pour animer ce diagnostic en direct avec un client, en s'appuyant sur ces fichiers sans les recopier
+- Ancien fichier générique knowledge/operations/audit-ia-methodologie.md remplacé par la nouvelle arborescence (déplacé et réécrit en 00-methode-principale.md)
+- Commité (cdc8d49) et poussé sur origin/main
+
+---
+
 ## 2026-07-21
 
 ### Import de l'exemple de positionnement "méthode 3S" (OBM Elite)

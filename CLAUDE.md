@@ -83,21 +83,7 @@ Une fois que je confirme, Claude met à jour le fichier en question et ajoute un
 └── labs/                        # Idées, tests et brouillons non validés
 ```
 
-Le détail complet du rôle de chaque dossier (knowledge, templates, sop, clients, labs, agents) et la règle de classement sont décrits dans `OBM-OS.md`.
-
-| Dossier | Utilité |
-|---------|---------|
-| `context/` | Tout ce qui me concerne et que Claude doit savoir |
-| `context/import/` | Documents externes (PDFs, exports, notes) à analyser |
-| `.claude/agents/` | Sous-agents spécialisés de mon OBM-OS |
-| `.claude/commands/` | Commandes personnalisées de mon Jarvis |
-| `.claude/skills/` | Skills (super-pouvoirs) de mon Jarvis |
-| `.claude/module-installs/` | Modules d'installation (initial et futurs) |
-| `knowledge/` | Connaissances et contenus de formation (dont OBM Elite) |
-| `templates/` | Modèles de documents à remplir ou adapter |
-| `sop/` | Procédures à suivre, étape par étape |
-| `clients/` | Un dossier par client, données cloisonnées |
-| `labs/` | Idées et expérimentations non validées |
+Le détail complet du rôle de chaque dossier (knowledge, templates, sop, clients, labs, agents) et la règle de classement sont décrits dans `OBM-OS.md`. Avant de créer une nouvelle ressource (knowledge, template, SOP, skill, dossier client), consulter la règle de classement dans `OBM-OS.md`.
 
 ---
 
@@ -122,17 +108,19 @@ Le détail complet du rôle de chaque dossier (knowledge, templates, sop, client
 
 **Objectif :** Démarrer ma journée avec une veille personnalisée en 30 secondes.
 
-Claude va effectuer une veille des actualités du jour, filtrée selon mon contexte personnel (mes objectifs, mes projets), et me proposer un focus pour la journée. Cette commande utilise la skill `recherche-actualites-contextualisees`.
+Claude va effectuer une veille des actualités du jour, filtrée selon mon contexte personnel (mes objectifs, mes projets), et me proposer un focus pour la journée. Cette commande utilise le skill `recherche-actualites`.
+
+### /commit
+
+**Objectif :** Sauvegarder tout le workspace (Git local, GitHub si configuré, copie OneDrive).
+
+À utiliser pour ne jamais perdre mes données et pouvoir tout récupérer sur un autre PC. Différent d'un simple `git commit` : cette commande fait aussi la copie cloud.
 
 ---
 
 ## Skills disponibles
 
-### recherche-actualites-contextualisees
-
-Skill de veille intelligente qui filtre les actualités selon mon contexte personnel. Activée automatiquement quand je demande "fais-moi un point sur les actualités", "donne-moi les news du jour", ou via la commande `/morning`.
-
-L'avantage : pas de bruit. Seulement ce qui me concerne vraiment, vu mes objectifs et projets actuels.
+Les skills vivent dans `.claude/skills/` et se décrivent eux-mêmes (nom et description dans leur en-tête) : ils sont détectés et proposés automatiquement à chaque session, pas besoin de les lister ici. Pour la veille personnalisée (`/morning`), c'est le skill `recherche-actualites`.
 
 ---
 
