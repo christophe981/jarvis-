@@ -1,19 +1,20 @@
 # /lot
 
 > Orchestrateur du cycle de construction des lots du workspace OBM-OS.
-> **Automation 0.3** : seules les sous-commandes `status` et `resume` sont actives, et elles sont **STRICTEMENT EN LECTURE SEULE**.
-> `draft`, `validate`, `promote` ne sont **pas** encore implémentées.
+> **Automation 0.4** : les sous-commandes `status`, `resume` (lecture seule) et `draft` (écriture **labs-only**) sont actives.
+> `validate`, `promote` ne sont **pas** encore implémentées.
 
 ---
 
-## Règle absolue (Automation 0.3)
+## Règle absolue (Automation 0.4)
 
 Quand je lance `/lot <sous-commande>` :
 
 - **`/lot status`** et **`/lot resume`** : autorisées, **lecture seule**. Elles ne créent, ne modifient, ne suppriment, ne committent et ne poussent **rien**.
-- **`/lot draft`**, **`/lot validate`**, **`/lot promote`** : répondre **exactement** :
+- **`/lot draft`** : autorisée, **écriture uniquement sous `labs/<ID>/`** pour un BUSINESS LOT explicitement autorisé (voir « `/lot draft` — Automation 0.4 »). Jamais de commit, push, backup, ni modification hors `labs/`.
+- **`/lot validate`**, **`/lot promote`** : répondre **exactement** :
 
-  `NOT IMPLEMENTED IN AUTOMATION 0.3`
+  `NOT IMPLEMENTED IN AUTOMATION 0.4`
 
   puis STOP sans aucune mutation.
 - **Toute autre sous-commande inconnue**, ainsi que **`/lot` sans sous-commande** : répondre **exactement** :
@@ -22,9 +23,9 @@ Quand je lance `/lot <sous-commande>` :
 
   puis STOP sans aucune mutation.
 
-Ne jamais mélanger ces deux catégories : `draft`/`validate`/`promote` renvoient `NOT IMPLEMENTED IN AUTOMATION 0.3` ; tout le reste (inconnu ou vide) renvoie `UNKNOWN /lot SUBCOMMAND — NO ACTION PERFORMED`.
+Ne jamais mélanger ces deux catégories : `validate`/`promote` renvoient `NOT IMPLEMENTED IN AUTOMATION 0.4` ; tout le reste (inconnu ou vide) renvoie `UNKNOWN /lot SUBCOMMAND — NO ACTION PERFORMED`.
 
-Ne jamais, dans cette version : écrire un fichier, cocher une case ROADMAP, écrire dans `labs/`, `clients/**` ou ailleurs, lancer `/commit`, `git commit`, `git push`, ni décider d'ouvrir/de passer un lot. Aucune ressource Lot 6. La barrière `LOT 6 — NOT STARTED — HUMAN AUTHORIZATION REQUIRED` de `ROADMAP.md` est respectée.
+Hors `/lot draft` (écriture strictement `labs/<ID>/`), ne jamais : écrire un fichier, cocher une case ROADMAP, écrire dans `clients/**` ou ailleurs, lancer `/commit`, `git commit`, `git push`, `backup.ps1`, ni décider d'ouvrir/de passer un lot. Aucune ressource Lot 6. La barrière `LOT 6 — NOT STARTED — HUMAN AUTHORIZATION REQUIRED` de `ROADMAP.md` est respectée.
 
 ---
 
@@ -43,7 +44,7 @@ Ne **jamais** déduire une validation humaine depuis : la mémoire conversationn
 
 ---
 
-## Preflight (obligatoire pour `/lot status` et `/lot resume`)
+## Preflight (obligatoire pour `/lot status`, `/lot resume` et `/lot draft`)
 
 Avant toute détermination, en lecture seule :
 
@@ -62,7 +63,7 @@ Si le remote ne correspond pas, afficher :
 
 Verdict : `BLOCKED`. Ne **jamais** tenter de modifier automatiquement le remote.
 
-### Git — fail-closed (pour `/lot status` et `/lot resume`)
+### Git — fail-closed (pour `/lot status`, `/lot resume` et `/lot draft`)
 
 - **HEAD détachée** ⇒ afficher `STOP — WORKSPACE STATE AMBIGUOUS — HUMAN REVIEW REQUIRED`, Verdict `BLOCKED`.
 - **Conflit, fichiers unmerged, merge/rebase en cours, ou index ambigu** ⇒ afficher `STOP — WORKSPACE STATE AMBIGUOUS — HUMAN REVIEW REQUIRED`, Verdict `BLOCKED`.
@@ -72,7 +73,7 @@ Ne rien corriger automatiquement.
 
 ---
 
-## Git en lecture seule (Automation 0.3)
+## Git (Automation 0.4)
 
 Lectures Git autorisées (notamment) :
 
@@ -84,7 +85,7 @@ Lectures Git autorisées (notamment) :
 - `git diff`
 - `git remote -v`
 
-Toujours **interdits** dans Automation 0.3 :
+Toujours **interdits** dans Automation 0.4 (y compris pour `/lot draft`) :
 
 - `git add`
 - `git commit`
@@ -97,7 +98,7 @@ Toujours **interdits** dans Automation 0.3 :
 - `git stash`
 - tout `checkout` destructif
 
-`/lot status` et `/lot resume` ne produisent **aucune** mutation Git.
+`/lot status` et `/lot resume` ne produisent **aucune** mutation. `/lot draft` peut **écrire des fichiers uniquement sous `labs/<ID>/`** (jamais ailleurs) et ne produit **aucune** mutation Git (pas de `git add`/`commit`/`push`).
 
 ---
 
@@ -236,12 +237,20 @@ Contraintes de valeurs :
 
 **Si `Track = AUTOMATION`, appliquer d'abord la règle prioritaire « Track AUTOMATION — pilotage humain » et ignorer les cas ci-dessous.** Les cas suivants ne valent que pour `Track = BUSINESS LOT` (lot métier explicitement autorisé).
 
-Ces textes remplissent le **champ** `Safe next action:` (valeur seule, sans répéter le libellé du champ : `Safe next action: /lot draft`, jamais `Safe next action: NEXT SAFE ACTION: /lot draft`). Quand la commande citée n'est pas encore implémentée, afficher `COMMAND NOT YET IMPLEMENTED` **après** le bloc de rapport, sans dupliquer le libellé.
+Ces textes remplissent le **champ** `Safe next action:` (valeur seule, sans répéter le libellé du champ : `Safe next action: /lot draft`, jamais `Safe next action: NEXT SAFE ACTION: /lot draft`). En Automation 0.4, `/lot draft` est **implémentée** (ne pas afficher `COMMAND NOT YET IMPLEMENTED` pour elle) ; `/lot promote` ne l'est pas encore, donc afficher `COMMAND NOT YET IMPLEMENTED` **après** le bloc de rapport quand la prochaine action est `/lot promote`.
 
 - **TODO + aucun draft** ⇒
   `Safe next action: /lot draft`
-  puis (après le rapport) `COMMAND NOT YET IMPLEMENTED`
   Verdict : `READY`.
+- **TODO + `labs/<ID>/` présent ET complet** (draft valide correspondant au sous-lot, voir « `/lot draft` — Automation 0.4 » §complétude) ⇒
+  `Safe next action: HUMAN REVIEW`
+  Human Gate : `HUMAN REVIEW`
+  Verdict : `WAITING_FOR_HUMAN`.
+  Ne **plus** proposer `/lot draft`. (Le statut ROADMAP reste `TODO` : `/lot draft` ne modifie jamais ROADMAP.)
+- **TODO + `labs/<ID>/` présent mais incomplet/incohérent** ⇒
+  `Safe next action: STOP — DRAFT STATE INCONSISTENT`
+  Human Gate : `HUMAN REVIEW`
+  Verdict : `BLOCKED`.
 - **DRAFTING + draft présent** ⇒
   `Safe next action: HUMAN REVIEW`
   Human Gate : `HUMAN REVIEW`
@@ -307,12 +316,20 @@ Verdict:
 
 **Si `Track = AUTOMATION`, appliquer d'abord la règle prioritaire « Track AUTOMATION — pilotage humain » et ignorer les cas ci-dessous.** Les cas suivants ne valent que pour `Track = BUSINESS LOT` (lot métier explicitement autorisé).
 
-Ces textes remplissent le **champ** `Safe resume action:` (valeur seule, sans répéter le libellé). Quand la commande citée n'est pas encore implémentée, afficher `COMMAND NOT YET IMPLEMENTED` **après** le bloc de rapport, sans dupliquer le libellé.
+Ces textes remplissent le **champ** `Safe resume action:` (valeur seule, sans répéter le libellé). En Automation 0.4, `/lot draft` est **implémentée** (ne pas afficher `COMMAND NOT YET IMPLEMENTED` pour elle) ; `/lot promote` ne l'est pas encore, donc afficher `COMMAND NOT YET IMPLEMENTED` **après** le bloc de rapport quand l'action de reprise est `/lot promote`.
 
 - **TODO + aucun draft** ⇒
   `Safe resume action: /lot draft`
-  puis (après le rapport) `COMMAND NOT YET IMPLEMENTED`
   Verdict : `READY`.
+- **TODO + `labs/<ID>/` présent ET complet** (draft valide correspondant au sous-lot) ⇒
+  `Safe resume action: HUMAN REVIEW`
+  Pending Human Gate : `HUMAN REVIEW`
+  Verdict : `WAITING_FOR_HUMAN`.
+  Ne **plus** proposer `/lot draft`. (Le statut ROADMAP reste `TODO`.)
+- **TODO + `labs/<ID>/` présent mais incomplet/incohérent** ⇒
+  `Safe resume action: STOP — DRAFT STATE INCONSISTENT`
+  Pending Human Gate : `HUMAN REVIEW`
+  Verdict : `BLOCKED`.
 - **DRAFTING + draft présent** ⇒
   `Safe resume action: HUMAN REVIEW`
   Pending Human Gate : `HUMAN REVIEW`
@@ -343,13 +360,277 @@ Aucune correction automatique. `/lot resume` ne relance aucune étape et ne fran
 
 ---
 
+## `/lot draft` — Automation 0.4 (écriture labs-only)
+
+Objectif : préparer, **sous `labs/<ID>/` uniquement**, le brouillon d'un futur **BUSINESS LOT explicitement autorisé**, puis STOP sur Human Gate. `/lot draft` ne construit jamais le chantier Automation, n'ouvre jamais Lot 6, ne modifie jamais ROADMAP/HISTORY ni aucun fichier hors `labs/<ID>/`, ne commit/push/backup jamais, ne valide ni ne promeut jamais.
+
+### Priorité absolue — Track AUTOMATION
+
+Si **`Track = AUTOMATION`**, `/lot draft` retourne **exactement** (aucune création dans `labs/`) :
+
+```text
+STOP — AUTOMATION CHANTIER REQUIRES HUMAN CONTROL
+
+Human Gate: HUMAN DECISION REQUIRED
+Verdict: WAITING_FOR_HUMAN
+```
+
+Cette règle prime sur toute logique BUSINESS LOT. Le chantier Automation ne se construit jamais lui-même via `/lot draft`.
+
+### Préconditions BUSINESS LOT (toutes vraies, sinon STOP fail-closed)
+
+1. `Track = BUSINESS LOT` ;
+2. exactement une entrée ROADMAP porte `_(en cours)_` ;
+3. ID unique dans ROADMAP ;
+4. ID valide (voir « ID ») ;
+5. `Statut = TODO` ;
+6. `Objectif` présent ;
+7. `Action attendue` présente ;
+8. `Destination cible` présente et reconnue ;
+9. `Fichier cible` présent et valide (voir « Fichier cible ») ;
+10. `Critère de validation` présent ;
+11. `Dépendances` satisfaites ou `aucune` ;
+12. champ durable présent dans le bloc ROADMAP : `Autorisation humaine : APPROVED` (valeur **exactement** `APPROVED`) ;
+13. `normalized-id` sans collision (voir « ID ») ;
+14. working tree compatible (voir « Working tree ») ;
+15. remote conforme (preflight) ;
+16. aucune barrière de sécurité (Lot 6, `clients/`).
+
+Le marqueur `_(en cours)_` seul **ne vaut pas** autorisation. La mémoire conversationnelle **ne vaut pas** autorisation. Le champ `Autorisation humaine :` doit être **présent** et **égal exactement à `APPROVED`** ; toute autre valeur, y compris vide, déclenche :
+
+```text
+STOP — BUSINESS LOT NOT HUMAN-AUTHORIZED
+
+Human Gate: HUMAN DECISION REQUIRED
+Verdict: WAITING_FOR_HUMAN
+```
+
+### Lot 6 hard gate
+
+LOT 6 est NOT STARTED. Même si un futur bloc Lot 6 existe, `/lot draft` refuse tant qu'une autorisation humaine explicite et durable n'a pas levé la barrière :
+
+```text
+STOP — LOT 6 NOT HUMAN-AUTHORIZED
+
+Human Gate: HUMAN DECISION REQUIRED
+Verdict: WAITING_FOR_HUMAN
+```
+
+Aucun agent Sales, aucun skill Sales, aucun draft Lot 6, aucune modification `AGENTS.md`.
+
+### ID
+
+L'ID ROADMAP doit respecter **exactement** `[A-Za-z0-9.-]+`. Le dossier `labs/` utilise la version **lowercase** (ex. `LOT-7.1` → `lot-7.1`). Refuser **sans normalisation destructive** (jamais supprimer silencieusement un caractère invalide) si l'ID contient `..`, `/`, `\`, `:`, des espaces, des caractères de contrôle, un chemin absolu, ou tout caractère hors `[A-Za-z0-9.-]` :
+
+`STOP — INVALID LOT ID` (Human Gate `NONE`, Verdict `BLOCKED`).
+
+**Fonction de normalisation** (unique et partagée par `/lot status`, `/lot resume`, `/lot draft`) : `normalized-id = lowercase(ID ROADMAP)`. Toute résolution physique du dossier draft utilise `labs/<normalized-id>/`.
+
+**Collision d'ID normalisé** : avant toute création ou reprise, calculer `normalized-id` et vérifier qu'aucun **autre** ID ROADMAP distinct ne produit le même `normalized-id` (ex. `LOT-7.1` et `lot-7.1` → même `lot-7.1`). La vérification d'unicité couvre donc l'unicité de l'ID source **et** de l'ID normalisé. En cas de collision :
+
+```text
+STOP — NORMALIZED LOT ID COLLISION
+
+Human Gate: HUMAN DECISION REQUIRED
+Verdict: BLOCKED
+```
+
+Ne créer aucun dossier.
+
+### Fichier cible
+
+Le bloc ROADMAP d'un BUSINESS LOT doit porter, en plus de `Destination cible` (racine gouvernée), un champ obligatoire :
+
+`Fichier cible : <chemin canonique final>`
+
+Exemples : `.claude/agents/sales.md`, `.claude/skills/prospection/SKILL.md`, `sop/sales/qualification.md`, `templates/sales/brief.md`, `knowledge/sales/prospection.md`.
+
+`Destination cible` reste la racine ; `Fichier cible` définit le chemin final exact. Le `Fichier cible` doit être relatif au workspace, situé **sous** la `Destination cible` annoncée, sans `..`, non absolu, sans sortie du workspace, ne visant ni `clients/**` ni `labs/`. Sinon :
+
+```text
+STOP — INVALID TARGET FILE PATH
+
+Human Gate: NONE
+Verdict: BLOCKED
+```
+
+### resource_type déterministe
+
+Ne jamais demander ni inventer `resource_type` ; le dériver **exclusivement** de `Destination cible` :
+
+- `.claude/agents/` ⇒ `agent`
+- `.claude/skills/` ⇒ `skill`
+- `sop/` ⇒ `sop`
+- `templates/` ⇒ `template`
+- `knowledge/` ⇒ `knowledge`
+
+Toute autre racine ⇒
+
+```text
+STOP — HUMAN DESTINATION DECISION REQUIRED
+
+Human Gate: HUMAN DECISION REQUIRED
+Verdict: WAITING_FOR_HUMAN
+```
+
+### candidate_main déterministe
+
+Construire `candidate_main` depuis `Fichier cible` : le candidat reproduit sous `candidate/` la partie du chemin cible située **après** la `Destination cible` (jamais d'invention de nom de fichier).
+
+- `Destination cible: .claude/agents/` + `Fichier cible: .claude/agents/sales.md` ⇒ `candidate_main: sales.md`
+- `Destination cible: .claude/skills/` + `Fichier cible: .claude/skills/prospection/SKILL.md` ⇒ `candidate_main: prospection/SKILL.md`
+- `Destination cible: sop/` + `Fichier cible: sop/sales/qualification.md` ⇒ `candidate_main: sales/qualification.md`
+
+### Structure du draft
+
+```text
+labs/<id-normalisé>/
+  meta.md
+  candidate/
+    <ressource candidate>
+```
+
+`meta.md` = orchestration locale uniquement. Tout contenu futur promouvable vit sous `candidate/`.
+
+### meta.md (8 clés exactes)
+
+```yaml
+---
+id_roadmap: "<ID original>"
+title: "<titre>"
+resource_type: "<agent|skill|sop|template|knowledge>"
+destination: "<destination finale>"
+candidate_main: "<chemin relatif sous candidate/>"
+head_git: "<SHA HEAD>"
+validation_criterion: "<critère ROADMAP>"
+draft_schema_version: "1"
+---
+```
+
+`candidate_main` doit être relatif, ne jamais contenir `..`, ne jamais être absolu, et résoudre strictement sous `candidate/`. Les 8 clés sont **exactes** : ne pas ajouter `target_file` pour l'instant. La destination finale exacte reste reconstructible par `destination + candidate_main` (ex. `.claude/agents/` + `sales.md` ⇒ `.claude/agents/sales.md`), qui doit correspondre **exactement** au `Fichier cible` ROADMAP. Les métadonnées ne contiennent jamais de secret, token, mot de passe, donnée client ou contenu sensible ; elles servent uniquement à l'orchestration locale et ne deviennent pas automatiquement partie de la ressource finale.
+
+### Destinations finales
+
+Autorisées uniquement : `knowledge/`, `templates/`, `sop/`, `.claude/skills/`, `.claude/agents/`.
+
+- `clients/**` ⇒
+  ```text
+  STOP — CLIENT FOLDER WRITE REQUIRES DEDICATED HUMAN VALIDATION
+
+  Human Gate: CLIENT VALIDATION REQUIRED
+  Verdict: WAITING_FOR_HUMAN
+  ```
+- `labs/` comme destination finale, ou destination inconnue / `À DÉCIDER` ⇒
+  ```text
+  STOP — HUMAN DESTINATION DECISION REQUIRED
+
+  Human Gate: HUMAN DECISION REQUIRED
+  Verdict: WAITING_FOR_HUMAN
+  ```
+- traversal (`..`) / chemin absolu / sortie du workspace ⇒
+  ```text
+  STOP — INVALID DRAFT OR DESTINATION PATH
+
+  Human Gate: NONE
+  Verdict: BLOCKED
+  ```
+- ID invalide ⇒
+  ```text
+  STOP — INVALID LOT ID
+
+  Human Gate: NONE
+  Verdict: BLOCKED
+  ```
+
+### Génération du candidat
+
+Avant de générer, **lire un exemple existant du même type** (jamais inventer un format quand un exemple canonique existe) :
+
+- **agent** : Markdown, frontmatter `name` + `description`, structure cohérente avec `.claude/agents/operations.md` ;
+- **skill** : dossier sous `candidate/`, `SKILL.md`, structure/frontmatter conforme aux skills existants ;
+- **SOP** : Markdown conforme aux SOP existantes ;
+- **template** : format conforme aux templates existants ;
+- **knowledge** : Markdown documentaire conforme aux exemples existants.
+
+Sources de lecture autorisées : bloc ROADMAP actif, `CLAUDE.md`, `OBM-OS.md`, `.docs/ARCHITECTURE.md`, exemples pertinents du même type, knowledge pertinente. Ne **jamais** parcourir automatiquement `clients/**`, `.env`, credentials, secrets, ou fichiers sans rapport. Ressource client nécessaire ⇒ STOP + Human Gate dédié.
+
+### Complétude du draft
+
+Un draft est **complet** uniquement si : `meta.md` existe ; YAML parseable ; les 8 clés présentes ; valeurs correspondant au bloc ROADMAP actif ; `Fichier cible` ROADMAP présent ; `candidate_main` dérivé exactement du `Fichier cible` ; `destination + candidate_main = Fichier cible` ; `normalized-id` sans collision ; `candidate_main` safe et existant ; fichier principal non vide ; candidat entièrement résolu sous `candidate/` ; minimum structurel du type respecté :
+
+- **agent** : frontmatter `name` + `description` ;
+- **skill** : `SKILL.md` + frontmatter requis ;
+- **SOP / template / knowledge** : candidat non vide, structure cohérente avec les exemples du même type.
+
+Sinon : `STOP — DRAFT STATE INCONSISTENT`.
+
+### Idempotence
+
+- aucun `labs/<ID>/` ⇒ création autorisable pour un BUSINESS LOT conforme ;
+- draft existant **et complet** ⇒
+  ```text
+  DRAFT ALREADY EXISTS — HUMAN REVIEW REQUIRED
+
+  Human Gate: HUMAN REVIEW
+  Verdict: WAITING_FOR_HUMAN
+  ```
+  aucun doublon, aucun overwrite ;
+- draft existant **mais incomplet** ⇒
+  ```text
+  STOP — DRAFT STATE INCONSISTENT
+
+  Human Gate: HUMAN REVIEW
+  Verdict: BLOCKED
+  ```
+
+### Working tree
+
+- clean ⇒ OK ;
+- uniquement `labs/<ID>/**` du même sous-lot ⇒ reprise/idempotence, aucun écrasement ;
+- toute autre modification ⇒
+  ```text
+  STOP — UNRELATED WORKING TREE CHANGES
+
+  Verdict: BLOCKED
+  ```
+
+### ROADMAP et HISTORY
+
+`/lot draft` ne modifie **jamais** `ROADMAP.md` ni `context/HISTORY.md`. Un BUSINESS LOT peut donc rester `Status = TODO` tout en ayant un draft valide ; `/lot status` et `/lot resume` interprètent alors le draft complet comme évidence (`Safe next/resume action: HUMAN REVIEW`), sans jamais reproposer `/lot draft`. Cette règle ne s'applique pas au Track AUTOMATION.
+
+### Sortie après création réussie
+
+```text
+JARVIS LOT DRAFT
+
+Workspace:
+Git HEAD:
+
+Track: BUSINESS LOT
+Active item:
+Status: TODO
+Destination:
+
+Draft path:
+Draft files:
+
+Validation criterion:
+
+Human Gate: HUMAN REVIEW
+Verdict: WAITING_FOR_HUMAN
+```
+
+Puis STOP. Jamais de validation automatique, de promotion, de commit, de push, de backup, ni d'ouverture du sous-lot suivant. En cas de STOP/refus, ne pas afficher de faux rapport de succès : émettre le message STOP correspondant puis les lignes `Human Gate:` et `Verdict:` adaptées.
+
+---
+
 ## Human Approval (protection renforcée)
 
-Automation 0.3 ne crée, ne déduit et n'enregistre **JAMAIS** `APPROVED`.
+Automation 0.4 ne crée, ne déduit et n'enregistre **JAMAIS** `APPROVED`.
 
-Une approbation ne doit **jamais** être déduite depuis : mémoire conversationnelle, ancienne session Claude, HISTORY, message Git, commit, présence d'un brouillon, existence d'une destination, ou ancien message utilisateur.
+Une approbation ne doit **jamais** être déduite depuis : mémoire conversationnelle, ancienne session Claude, HISTORY, message Git, commit, présence d'un brouillon, existence d'une destination, ou ancien message utilisateur. Pour `/lot draft`, l'autorisation d'un BUSINESS LOT n'existe que via le champ durable `Autorisation humaine : APPROVED` inscrit dans le bloc ROADMAP.
 
-`/lot status` et `/lot resume` peuvent uniquement **LIRE** un statut déjà inscrit dans `ROADMAP.md`. Aucune validation n'est créée par Automation 0.3.
+`/lot status` et `/lot resume` peuvent uniquement **LIRE** un statut déjà inscrit dans `ROADMAP.md`. `/lot draft` ne modifie jamais ROADMAP. Aucune validation n'est créée par Automation 0.4.
 
 ---
 
@@ -382,6 +663,6 @@ Toutes les fences Markdown de ce fichier doivent être correctement ouvertes et 
 ## Périmètre et garde-fous
 
 - N'agit que dans le workspace courant `christophe981/jarvis-` ; ne touche jamais à un autre dépôt.
-- N'exécute aucune commande Git mutante. Lectures autorisées uniquement (voir « Git en lecture seule »).
-- Ne propose ni ne lance `/commit` ni `backup.ps1` en 0.3.
+- N'exécute aucune commande Git mutante (voir « Git (Automation 0.4) »). Seule écriture disque autorisée : `/lot draft` sous `labs/<ID>/`.
+- Ne propose ni ne lance `/commit` ni `backup.ps1` en 0.4.
 - Communication en français, réponses concises, pas de tirets longs.
