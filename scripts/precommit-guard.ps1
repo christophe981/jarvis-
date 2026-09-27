@@ -1,4 +1,4 @@
-# precommit-guard.ps1
+﻿# precommit-guard.ps1
 # Garde-fou anti-secret execute AVANT la sauvegarde (/commit -> backup.ps1).
 # Le depot est PUBLIC : ce script echoue FERME (exit non-zero) si un secret probable
 # fait partie des fichiers CANDIDATS AU COMMIT.
@@ -26,7 +26,7 @@ $binaryExt = @(".pptx", ".docx", ".xlsx", ".pdf", ".png", ".jpg", ".jpeg", ".gif
                ".zip", ".exe", ".dll", ".ico", ".woff", ".woff2", ".ttf", ".mp4", ".mp3")
 
 # Valeurs placeholder acceptees (faux positifs documentaires)
-$placeholderRegex = '^(?i)("|'')?(<[^>]*>|your[_-]?\w*|x{3,}|changeme|placeholder|example|dummy|sample|test|redacted|\*{3,}|\.{3,})("|'')?$'
+$placeholderRegex = '(?i)^(<[^>]*>|your[_-]?\w*|x{3,}|changeme|placeholder|example|dummy|sample|test|redacted|\*{3,}|-{3,}|env\([A-Z0-9_]+\)|process\.env\.[A-Z0-9_]+|\$\{[A-Z0-9_]+\}|\$env:[A-Z0-9_]+)$'
 
 # Motifs de secrets reels (valeurs a forte entropie / formats connus)
 $patterns = @(
@@ -39,7 +39,7 @@ $patterns = @(
 )
 
 # Assignation d'une cle sensible a une valeur reelle
-$assignRegex = '(?i)\b(password|passwd|pwd|api[_-]?key|secret|token|access[_-]?key)\b\s*[:=]\s*["'']?([^"''\s#]{6,})'
+$assignRegex = '(?i)\b(password|passwd|pwd|api[_-]?key|secret|token|access[_-]?key)\b\s*[:=]\s*(["''])([^"'']{6,})\2'
 
 # --- Enumeration des fichiers CANDIDATS AU COMMIT via Git ---
 # git ls-files -c -o --exclude-standard = suivis (cached) + non-suivis non-ignores.
@@ -99,7 +99,7 @@ foreach ($rel in $relFiles) {
         }
         $m = [regex]::Match($line, $assignRegex)
         if ($m.Success) {
-            $val = $m.Groups[2].Value
+        $val = $m.Groups[3].Value
             if ($val -notmatch $placeholderRegex) {
                 Add-Finding $relNorm $lineNo ("assignation sensible: " + $m.Groups[1].Value + "=")
             }
