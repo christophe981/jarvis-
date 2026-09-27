@@ -9,6 +9,15 @@
 
 ## 2026-09-27
 
+### LOT 6.2 — Validation opérationnelle Sales (COMPLETE)
+- Date : 2026-09-27
+- ID : 6.2 — Validation opérationnelle Sales
+- Résultat : COMPLETE
+- Tests : 6/6 PASS (qualification sans données, prospection, préparation RDV, après RDV, Human Gate, isolation des données)
+- Blockers : aucun
+- Ressource validée : .claude/agents/sales.md (inchangée)
+- LOT 6 clôturé (6.1 + 6.2 COMPLETE). Lot suivant non ouvert (attend décision humaine)
+
 ### LOT 6.1 — Agent Sales promu (COMPLETE)
 - ID : 6.1 — Agent Sales
 - Fichier cible : .claude/agents/sales.md (créé par promotion depuis labs/6.1/candidate/sales.md)

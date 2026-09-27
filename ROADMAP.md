@@ -59,11 +59,9 @@ Automation 1.0 COMPLETE
 
 Autorisation humaine : APPROVED
 
-_(en cours)_
-
 ## 6.2 — Validation opérationnelle Sales
 
-Statut : TODO
+Statut : COMPLETE
 
 Objectif :
 Valider le comportement de l'agent Sales sur des scénarios commerciaux contrôlés.
