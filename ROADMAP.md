@@ -13,9 +13,9 @@
 > Ce chantier prépare l'automatisation du cycle des futurs lots. Ce n'est PAS un lot métier et il ne doit pas être numéroté comme tel. Chaque étape reste soumise à validation humaine.
 
 - [x] Automation 0.1 — Audit
-- [ ] Automation 0.2A — Assainissement ROADMAP _(en cours)_
-- [ ] Automation 0.2B — Architecture orchestrateur
-- [ ] Automation 0.3 — Lecteur d'état / preflight
+- [x] Automation 0.2A — Assainissement ROADMAP
+- [x] Automation 0.2B — Architecture orchestrateur
+- [ ] Automation 0.3 — Lecteur d'état / preflight _(en cours)_
 - [ ] Automation 0.4 — Préparateur labs-only
 - [ ] Automation 0.5 — Promotion / journalisation / sauvegarde
 - [ ] Automation 0.6 — Sécurité / secrets / tests documentaires
