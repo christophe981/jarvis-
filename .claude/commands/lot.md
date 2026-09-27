@@ -1,31 +1,26 @@
 # /lot
 
 > Orchestrateur du cycle de construction des lots du workspace OBM-OS.
-> **Automation 0.4** : les sous-commandes `status`, `resume` (lecture seule) et `draft` (écriture **labs-only**) sont actives.
-> `validate`, `promote` ne sont **pas** encore implémentées.
+> **Automation 0.6** : `status`, `resume` (lecture seule), `draft` (écriture **labs-only**), `validate` (écrit uniquement `Statut : APPROVED` dans le bloc ROADMAP après approbation humaine explicite) et `promote` (promeut le candidat vers sa destination + journalise) sont actives.
+> Le chantier Automation lui-même reste **hors** de ce workflow (pilotage humain manuel jusqu'à Automation 1.0).
 
 ---
 
-## Règle absolue (Automation 0.4)
+## Règle absolue (Automation 0.6)
 
 Quand je lance `/lot <sous-commande>` :
 
 - **`/lot status`** et **`/lot resume`** : autorisées, **lecture seule**. Elles ne créent, ne modifient, ne suppriment, ne committent et ne poussent **rien**.
-- **`/lot draft`** : autorisée, **écriture uniquement sous `labs/<ID>/`** pour un BUSINESS LOT explicitement autorisé (voir « `/lot draft` — Automation 0.4 »). Jamais de commit, push, backup, ni modification hors `labs/`.
-- **`/lot validate`**, **`/lot promote`** : répondre **exactement** :
-
-  `NOT IMPLEMENTED IN AUTOMATION 0.4`
-
-  puis STOP sans aucune mutation.
-- **Toute autre sous-commande inconnue**, ainsi que **`/lot` sans sous-commande** : répondre **exactement** :
+- **`/lot draft`** : autorisée, **écriture uniquement sous `labs/<ID>/`** pour un BUSINESS LOT explicitement autorisé (voir « `/lot draft` »). Jamais de commit, push, backup, ni modification hors `labs/`.
+- **`/lot validate`** : autorisée, **écrit uniquement `Statut : APPROVED`** dans le bloc ROADMAP du BUSINESS LOT actif, et **seulement** après approbation humaine explicite `APPROVE <ID>` (voir « `/lot validate` »). Jamais de promotion, HISTORY, commit, push.
+- **`/lot promote`** : autorisée, promeut `labs/<normalized-id>/candidate/**` vers le `Fichier cible`, met le bloc ROADMAP à `COMPLETE`/`[x]` et ajoute une entrée `HISTORY` (voir « `/lot promote` »). Jamais de commit, push, backup.
+- **Toute sous-commande inconnue**, ainsi que **`/lot` sans sous-commande** : répondre **exactement** :
 
   `UNKNOWN /lot SUBCOMMAND — NO ACTION PERFORMED`
 
   puis STOP sans aucune mutation.
 
-Ne jamais mélanger ces deux catégories : `validate`/`promote` renvoient `NOT IMPLEMENTED IN AUTOMATION 0.4` ; tout le reste (inconnu ou vide) renvoie `UNKNOWN /lot SUBCOMMAND — NO ACTION PERFORMED`.
-
-Hors `/lot draft` (écriture strictement `labs/<ID>/`), ne jamais : écrire un fichier, cocher une case ROADMAP, écrire dans `clients/**` ou ailleurs, lancer `/commit`, `git commit`, `git push`, `backup.ps1`, ni décider d'ouvrir/de passer un lot. Aucune ressource Lot 6. La barrière `LOT 6 — NOT STARTED — HUMAN AUTHORIZATION REQUIRED` de `ROADMAP.md` est respectée.
+Aucune sous-commande ne lance jamais `/commit`, `git add`, `git commit`, `git push` ni `backup.ps1`. Écritures disque autorisées : `/lot draft` sous `labs/<ID>/` ; `/lot validate` sur le seul bloc ROADMAP concerné ; `/lot promote` sur le `Fichier cible`, le bloc ROADMAP et `context/HISTORY.md`. Aucune ressource Lot 6. La barrière `LOT 6 — NOT STARTED — HUMAN AUTHORIZATION REQUIRED` de `ROADMAP.md` est respectée.
 
 ---
 
@@ -237,7 +232,7 @@ Contraintes de valeurs :
 
 **Si `Track = AUTOMATION`, appliquer d'abord la règle prioritaire « Track AUTOMATION — pilotage humain » et ignorer les cas ci-dessous.** Les cas suivants ne valent que pour `Track = BUSINESS LOT` (lot métier explicitement autorisé).
 
-Ces textes remplissent le **champ** `Safe next action:` (valeur seule, sans répéter le libellé du champ : `Safe next action: /lot draft`, jamais `Safe next action: NEXT SAFE ACTION: /lot draft`). En Automation 0.4, `/lot draft` est **implémentée** (ne pas afficher `COMMAND NOT YET IMPLEMENTED` pour elle) ; `/lot promote` ne l'est pas encore, donc afficher `COMMAND NOT YET IMPLEMENTED` **après** le bloc de rapport quand la prochaine action est `/lot promote`.
+Ces textes remplissent le **champ** `Safe next action:` (valeur seule, sans répéter le libellé du champ : `Safe next action: /lot draft`, jamais `Safe next action: NEXT SAFE ACTION: /lot draft`). En Automation 0.6, `/lot draft`, `/lot validate` et `/lot promote` sont **toutes implémentées** : ne jamais afficher `COMMAND NOT YET IMPLEMENTED`.
 
 - **TODO + aucun draft** ⇒
   `Safe next action: /lot draft`
@@ -262,11 +257,10 @@ Ces textes remplissent le **champ** `Safe next action:` (valeur seule, sans rép
   `Safe next action: HUMAN VALIDATION REQUIRED`
   Human Gate : `HUMAN VALIDATION REQUIRED`
   Verdict : `WAITING_FOR_HUMAN`.
-- **APPROVED + destination absente** ⇒
+- **APPROVED + cible finale non promue** ⇒
   `Safe next action: /lot promote`
-  puis (après le rapport) `COMMAND NOT YET IMPLEMENTED`
   Verdict : `READY`.
-- **APPROVED + destination déjà présente** ⇒
+- **APPROVED + cible finale déjà présente** ⇒
   `Safe next action: STOP — PROMOTION STATE AMBIGUOUS — HUMAN REVIEW REQUIRED`
   Verdict : `BLOCKED`.
 - **COMPLETE** ⇒
@@ -316,7 +310,7 @@ Verdict:
 
 **Si `Track = AUTOMATION`, appliquer d'abord la règle prioritaire « Track AUTOMATION — pilotage humain » et ignorer les cas ci-dessous.** Les cas suivants ne valent que pour `Track = BUSINESS LOT` (lot métier explicitement autorisé).
 
-Ces textes remplissent le **champ** `Safe resume action:` (valeur seule, sans répéter le libellé). En Automation 0.4, `/lot draft` est **implémentée** (ne pas afficher `COMMAND NOT YET IMPLEMENTED` pour elle) ; `/lot promote` ne l'est pas encore, donc afficher `COMMAND NOT YET IMPLEMENTED` **après** le bloc de rapport quand l'action de reprise est `/lot promote`.
+Ces textes remplissent le **champ** `Safe resume action:` (valeur seule, sans répéter le libellé). En Automation 0.6, `/lot draft`, `/lot validate` et `/lot promote` sont **toutes implémentées** : ne jamais afficher `COMMAND NOT YET IMPLEMENTED`.
 
 - **TODO + aucun draft** ⇒
   `Safe resume action: /lot draft`
@@ -341,11 +335,10 @@ Ces textes remplissent le **champ** `Safe resume action:` (valeur seule, sans r�
   `Safe resume action: HUMAN VALIDATION REQUIRED`
   Pending Human Gate : `HUMAN VALIDATION REQUIRED`
   Verdict : `WAITING_FOR_HUMAN`.
-- **APPROVED + destination absente** ⇒
+- **APPROVED + cible finale non promue** ⇒
   `Safe resume action: /lot promote`
-  puis (après le rapport) `COMMAND NOT YET IMPLEMENTED`
   Verdict : `READY`.
-- **APPROVED + destination déjà présente** ⇒
+- **APPROVED + cible finale déjà présente** ⇒
   `Safe resume action: STOP — PROMOTION STATE AMBIGUOUS — HUMAN REVIEW REQUIRED`
   Verdict : `BLOCKED`.
 - **COMPLETE** ⇒
@@ -624,13 +617,114 @@ Puis STOP. Jamais de validation automatique, de promotion, de commit, de push, d
 
 ---
 
+## `/lot validate` — Automation 0.5 (approbation humaine explicite)
+
+Actif **uniquement** pour `Track = BUSINESS LOT`. Sur `Track = AUTOMATION` : `STOP — AUTOMATION CHANTIER REQUIRES HUMAN CONTROL` / `HUMAN DECISION REQUIRED` / `WAITING_FOR_HUMAN`.
+
+### Préconditions
+
+- un seul item `_(en cours)_` ;
+- draft valide présent (voir « `/lot draft` » §complétude) ;
+- métadonnées cohérentes ;
+- `destination + candidate_main = Fichier cible` ;
+- aucune modification étrangère (working tree) ;
+- lot explicitement autorisé (`Autorisation humaine : APPROVED` dans ROADMAP) ;
+- aucun secret détecté dans le candidat (preflight secret, voir « Sécurité »).
+
+Sinon : STOP fail-closed (message adapté), aucune écriture.
+
+### Présentation puis Human Gate
+
+`/lot validate` présente d'abord (lecture seule) : `ID`, `titre`, `destination`, `Fichier cible`, résumé du draft, `critère de validation`, diff/résumé pertinent du candidat. Puis il exige une **validation humaine explicite liée à l'ID**, sous la forme exacte :
+
+`APPROVE <ID>`
+
+Une réponse vague (« oui », « ok », « validé », « continue ») **ne suffit pas**. Sans approbation exacte :
+
+```text
+STOP — EXPLICIT LOT APPROVAL REQUIRED
+
+Human Gate: HUMAN VALIDATION REQUIRED
+Verdict: WAITING_FOR_HUMAN
+```
+
+### Effet de `APPROVE <ID>`
+
+Avec l'approbation exacte, `/lot validate` modifie **uniquement** le bloc ROADMAP correspondant :
+
+`Statut : APPROVED`
+
+Ne pas promouvoir. Ne pas écrire `HISTORY`. Ne pas cocher `[x]`. Ne pas commit. Ne pas push. Puis STOP (`Human Gate: HUMAN DECISION REQUIRED`, `Safe next action: /lot promote`).
+
+---
+
+## `/lot promote` — Automation 0.5 (promotion + journalisation)
+
+Actif **uniquement** pour `Track = BUSINESS LOT`. Sur `Track = AUTOMATION` : `STOP — AUTOMATION CHANTIER REQUIRES HUMAN CONTROL` / `HUMAN DECISION REQUIRED` / `WAITING_FOR_HUMAN`.
+
+### Préconditions
+
+- `Track = BUSINESS LOT` ;
+- item unique `_(en cours)_` ;
+- `Statut : APPROVED` inscrit dans ROADMAP ;
+- draft complet et cohérent ;
+- `destination + candidate_main = Fichier cible` ;
+- **cible finale inexistante** ;
+- aucune modification étrangère ;
+- secret preflight PASS (voir « Sécurité ») ;
+- lot toujours autorisé.
+
+Si la cible finale existe déjà :
+
+```text
+STOP — TARGET FILE ALREADY EXISTS — HUMAN REVIEW REQUIRED
+
+Verdict: BLOCKED
+```
+
+### Promotion
+
+Sur promotion valide, copier/promouvoir **uniquement** `labs/<normalized-id>/candidate/**` vers le `Fichier cible` canonique. Ne **jamais** promouvoir `meta.md`. Puis :
+
+1. vérifier que la cible finale existe ;
+2. vérifier contenu non vide ;
+3. vérifier cohérence minimale du type (agent : frontmatter `name`+`description` ; skill : `SKILL.md`+frontmatter ; sop/template/knowledge : non vide) ;
+4. mettre le bloc ROADMAP à `Statut : COMPLETE` et cocher `[x]` ;
+5. ajouter **une** entrée idempotente dans `context/HISTORY.md` contenant au minimum : `ID`, `titre`, `date`, `Fichier cible`, résultat `COMPLETE` ;
+6. ne **pas** supprimer automatiquement le draft `labs/` ;
+7. ne **pas** ouvrir automatiquement le lot suivant.
+
+Puis afficher `Human Gate: HUMAN DECISION REQUIRED` et `Safe next action: /commit`. **Ne pas** lancer `/commit`.
+
+### Idempotence
+
+- ROADMAP `COMPLETE` **et** cible finale existante ⇒ `LOT ALREADY COMPLETE — NO ACTION PERFORMED` (rien refait) ;
+- entrée `HISTORY` déjà présente pour cet ID ⇒ ne pas dupliquer ;
+- cible présente **mais** ROADMAP non `COMPLETE` ⇒ `STOP — PROMOTION STATE AMBIGUOUS — HUMAN REVIEW REQUIRED`.
+
+---
+
 ## Human Approval (protection renforcée)
 
-Automation 0.4 ne crée, ne déduit et n'enregistre **JAMAIS** `APPROVED`.
+Seule `/lot validate`, et **uniquement** sur approbation humaine explicite `APPROVE <ID>`, inscrit `Statut : APPROVED`. Aucune autre commande ne crée, ne déduit ni n'enregistre `APPROVED`.
 
-Une approbation ne doit **jamais** être déduite depuis : mémoire conversationnelle, ancienne session Claude, HISTORY, message Git, commit, présence d'un brouillon, existence d'une destination, ou ancien message utilisateur. Pour `/lot draft`, l'autorisation d'un BUSINESS LOT n'existe que via le champ durable `Autorisation humaine : APPROVED` inscrit dans le bloc ROADMAP.
+Une approbation ne doit **jamais** être déduite depuis : mémoire conversationnelle, ancienne session Claude, HISTORY, message Git, commit, présence d'un brouillon, existence d'une destination, réponse vague (« oui », « ok »), ou ancien message utilisateur. Pour `/lot draft`, l'éligibilité d'un BUSINESS LOT exige le champ durable `Autorisation humaine : APPROVED` dans le bloc ROADMAP ; pour `/lot validate`, l'approbation exige la commande exacte `APPROVE <ID>`.
 
-`/lot status` et `/lot resume` peuvent uniquement **LIRE** un statut déjà inscrit dans `ROADMAP.md`. `/lot draft` ne modifie jamais ROADMAP. Aucune validation n'est créée par Automation 0.4.
+`/lot status` et `/lot resume` peuvent uniquement **LIRE** les statuts inscrits dans `ROADMAP.md`. `/lot draft` ne modifie jamais ROADMAP.
+
+---
+
+## Sécurité — preflight secret (Automation 0.6)
+
+Le dépôt est **public**. Avant toute écriture de `/lot promote` (et en contrôle dans `/lot validate`), et avant toute sauvegarde via `/commit`, un preflight secret s'applique au contenu concerné (candidat `labs/<ID>/candidate/**`, cible promue, working tree pour `/commit`).
+
+Le preflight délègue au script `scripts/precommit-guard.ps1` lorsqu'il est disponible (exécuté par `/commit` avant `backup.ps1`). Il échoue **fermé** (aucune promotion, aucune sauvegarde) s'il détecte notamment : un fichier `.env` réel, un `*.pem` / `*.key`, un bloc de clé privée, un jeton de type `ghp_…`, `xox…`, `sk-…`, `AKIA…`, `AIza…`, ou une assignation sensible (`password=`, `api_key=`, `token=`, `secret=`) avec une valeur réelle non-placeholder. Il ignore les faux positifs documentaires (le simple mot « secret »/« secrets », `.env.example`, placeholders `<TOKEN>`, `YOUR_API_KEY`, `xxx`). En détection :
+
+```text
+STOP — POTENTIAL SECRET DETECTED
+```
+
+La valeur complète du secret n'est **jamais** imprimée. Le preflight cible de vrais identifiants, pas le mot « secrets ».
 
 ---
 
@@ -663,6 +757,6 @@ Toutes les fences Markdown de ce fichier doivent être correctement ouvertes et 
 ## Périmètre et garde-fous
 
 - N'agit que dans le workspace courant `christophe981/jarvis-` ; ne touche jamais à un autre dépôt.
-- N'exécute aucune commande Git mutante (voir « Git (Automation 0.4) »). Seule écriture disque autorisée : `/lot draft` sous `labs/<ID>/`.
-- Ne propose ni ne lance `/commit` ni `backup.ps1` en 0.4.
+- N'exécute aucune commande Git mutante (voir « Git (Automation 0.4) »). Écritures disque autorisées : `/lot draft` sous `labs/<ID>/` ; `/lot validate` sur le bloc ROADMAP concerné ; `/lot promote` sur le `Fichier cible`, le bloc ROADMAP et `context/HISTORY.md`.
+- Propose `/commit` en fin de promotion (`Safe next action: /commit`) mais ne le lance **jamais** automatiquement ; ne lance jamais `backup.ps1`.
 - Communication en français, réponses concises, pas de tirets longs.

@@ -16,9 +16,9 @@
 - [x] Automation 0.2A — Assainissement ROADMAP
 - [x] Automation 0.2B — Architecture orchestrateur
 - [x] Automation 0.3 — Lecteur d'état / preflight
-- [ ] Automation 0.4 — Préparateur labs-only _(en cours)_
-- [ ] Automation 0.5 — Promotion / journalisation / sauvegarde
-- [ ] Automation 0.6 — Sécurité / secrets / tests documentaires
-- [ ] Automation 1.0 — Validation humaine finale
+- [x] Automation 0.4 — Préparateur labs-only
+- [x] Automation 0.5 — Promotion / journalisation / sauvegarde
+- [x] Automation 0.6 — Sécurité / secrets / tests documentaires
+- [ ] Automation 1.0 — Validation humaine finale _(en attente validation humaine finale)_
 
 **LOT 6 — NOT STARTED — HUMAN AUTHORIZATION REQUIRED**

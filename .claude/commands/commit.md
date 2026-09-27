@@ -9,6 +9,20 @@
 
 Quand je lance `/commit`, execute la sequence suivante :
 
+### Etape 0 : Garde-fou anti-secret (obligatoire, depot public)
+
+Avant toute sauvegarde :
+
+1. Revue rapide du working tree (`git status --short`).
+2. Si `scripts/precommit-guard.ps1` existe, l'executer :
+
+```
+powershell -ExecutionPolicy Bypass -File "C:\Users\lacha\Downloads\jarvis-starter-kit\scripts\precommit-guard.ps1"
+```
+
+3. Si le script echoue (exit non-zero / `STOP — POTENTIAL SECRET DETECTED`) : **STOP**. Ne pas executer `backup.ps1`, ne rien committer, ne rien pousser. Signaler le fichier concerne (sans afficher la valeur du secret) et attendre une correction humaine.
+4. Si le script reussit (PASS) ou est absent : continuer le workflow ci-dessous.
+
 ### Etape 1 : Lancer la sauvegarde
 
 Lance le script de sauvegarde via PowerShell :
