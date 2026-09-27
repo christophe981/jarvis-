@@ -19,6 +19,6 @@
 - [x] Automation 0.4 — Préparateur labs-only
 - [x] Automation 0.5 — Promotion / journalisation / sauvegarde
 - [x] Automation 0.6 — Sécurité / secrets / tests documentaires
-- [ ] Automation 1.0 — Validation humaine finale _(en attente validation humaine finale)_
+- [x] Automation 1.0 — Validation humaine finale
 
 **LOT 6 — NOT STARTED — HUMAN AUTHORIZATION REQUIRED**
