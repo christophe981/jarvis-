@@ -21,4 +21,62 @@
 - [x] Automation 0.6 — Sécurité / secrets / tests documentaires
 - [x] Automation 1.0 — Validation humaine finale
 
-**LOT 6 — NOT STARTED — HUMAN AUTHORIZATION REQUIRED**
+# LOT 6 — Agent Sales v1
+
+Objectif global :
+Créer le premier agent métier Sales de Jarvis, orienté qualification,
+prospection, préparation de rendez-vous et suivi commercial,
+sans automatisation externe et sans modifier les autres agents.
+
+## 6.1 — Agent Sales
+
+Statut : TODO
+Objectif :
+Créer l'agent Sales v1 de Jarvis.
+
+Action attendue :
+Construire un agent commercial capable de :
+- qualifier un prospect ;
+- préparer une approche de prospection ;
+- préparer un rendez-vous commercial ;
+- structurer les prochaines actions ;
+- proposer un suivi commercial ;
+- rester dans une logique d'assistance et de validation humaine.
+
+Destination cible :
+.claude/agents/
+
+Fichier cible :
+.claude/agents/sales.md
+
+Critère de validation :
+Le fichier sales.md existe, respecte le format canonique des agents du workspace,
+définit clairement son rôle, ses limites, ses déclencheurs et son fonctionnement,
+et passe une revue humaine.
+
+Dépendances :
+Automation 1.0 COMPLETE
+
+Autorisation humaine : APPROVED
+
+_(en cours)_
+
+## 6.2 — Validation opérationnelle Sales
+
+Statut : TODO
+
+Objectif :
+Valider le comportement de l'agent Sales sur des scénarios commerciaux contrôlés.
+
+Action attendue :
+Tester plusieurs situations représentatives et confirmer que l'agent :
+- reste cohérent avec OBM-OS ;
+- ne prend pas de décision commerciale irréversible seul ;
+- produit des actions utilisables ;
+- respecte les Human Gates.
+
+Critère de validation :
+Tests validés humainement et aucun blocker critique.
+
+Dépendances :
+6.1 COMPLETE
