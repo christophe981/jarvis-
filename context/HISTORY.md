@@ -7,6 +7,15 @@
 
 ---
 
+## 2026-09-27
+
+### LOT 6.1 — Agent Sales promu (COMPLETE)
+- ID : 6.1 — Agent Sales
+- Fichier cible : .claude/agents/sales.md (créé par promotion depuis labs/6.1/candidate/sales.md)
+- Résultat : COMPLETE
+- Sous-agent Sales v1 (avant-vente : qualification, prospection, préparation de rendez-vous, prochaines actions, suivi commercial), en assistance sous validation humaine ; aucune décision commerciale irréversible seul, aucune automatisation externe, aucune exploration automatique de clients/**
+- Promotion via l'orchestrateur /lot (validate APPROVE 6.1 puis promote). Brouillon labs/6.1/ conservé. Lot suivant 6.2 non ouvert (attend décision humaine)
+
 ## 2026-07-30
 
 ### Méthode de diagnostic IA et skill diagnostic-ia-client

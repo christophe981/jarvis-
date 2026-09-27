@@ -30,7 +30,7 @@ sans automatisation externe et sans modifier les autres agents.
 
 ## 6.1 — Agent Sales
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer l'agent Sales v1 de Jarvis.
 
