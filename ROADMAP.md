@@ -153,3 +153,78 @@ Dépendances :
 7.2 COMPLETE
 
 Autorisation humaine : APPROVED
+
+# LOT 8 — Pilotage commercial
+
+Objectif global :
+Créer les outils pour suivre et piloter l'activité de prospection :
+fiche individuelle par prospect, vue pipeline globale et procédure de revue hebdomadaire.
+
+## 8.1 — Template fiche prospect
+
+Statut : COMPLETE
+Objectif :
+Créer une fiche individuelle structurée pour suivre un prospect de la prise de contact jusqu'à la clôture.
+
+Action attendue :
+Produire un fichier template avec les sections : contexte du prospect, signaux déclencheurs, historique des contacts, statut actuel, prochaines actions.
+
+Destination cible :
+templates/
+
+Fichier cible :
+templates/commercial/fiche-prospect_modele.md
+
+Critère de validation :
+Le fichier existe, couvre toutes les informations nécessaires au suivi individuel d'un prospect, et a passé une revue humaine.
+
+Dépendances :
+LOT 7 COMPLETE
+
+Autorisation humaine : APPROVED
+
+## 8.2 — Template pipeline commercial
+
+Statut : TODO
+Objectif :
+Créer une vue globale de tous les prospects actifs sur une seule page pour piloter le pipeline commercial.
+
+Action attendue :
+Produire un fichier template avec un tableau par statut (Identifié, Contacté, Relancé, Appel, Clos) permettant de visualiser l'ensemble du pipe en un coup d'oeil.
+
+Destination cible :
+templates/
+
+Fichier cible :
+templates/commercial/pipeline-commercial_modele.md
+
+Critère de validation :
+Le fichier existe, offre une vue synthétique de tous les prospects par statut, et a passé une revue humaine.
+
+Dépendances :
+8.1 COMPLETE
+
+Autorisation humaine : APPROVED
+
+## 8.3 — SOP revue hebdomadaire pipeline
+
+Statut : TODO
+Objectif :
+Créer une procédure standard pour faire le point chaque semaine sur le pipeline commercial.
+
+Action attendue :
+Produire un fichier SOP avec les étapes de la revue hebdomadaire : quoi regarder, comment décider (avancer, relancer, clore), et comment planifier la semaine suivante.
+
+Destination cible :
+sop/
+
+Fichier cible :
+sop/commercial/revue-hebdomadaire-pipeline.md
+
+Critère de validation :
+Le fichier existe, couvre le déroulé complet d'une revue hebdomadaire pipeline (30 min max), et a passé une revue humaine.
+
+Dépendances :
+8.2 COMPLETE
+
+Autorisation humaine : APPROVED

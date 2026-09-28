@@ -9,6 +9,13 @@
 
 ## 2026-09-28
 
+### LOT 8.1 — Template fiche prospect (COMPLETE)
+- ID : 8.1 — Template fiche prospect
+- Date : 2026-09-28
+- Fichier cible : templates/commercial/fiche-prospect_modele.md
+- Résultat : COMPLETE
+- Contenu : fiche individuelle de suivi prospect avec identification, signal déclencheur (6 types + score /5), qualification multi-dimensionnelle, historique contacts, tracker 10 statuts (IDENTIFIÉ à GAGNÉ/CLOS), notes libres, décision de clôture + réactivation.
+
 ### Session LOT 7 — Boîte à outils Prospection (COMPLETE)
 - LOT 7 défini et exécuté en une session : 3 sous-lots, 3 ressources livrées et sauvegardées
 - 7.1 : template de messages de prospection directe (LinkedIn + email, 4 situations, 3 relances)
