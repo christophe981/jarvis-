@@ -9,6 +9,13 @@
 
 ## 2026-09-28
 
+### LOT 7.2 — Template trame d'appel découverte (COMPLETE)
+- ID : 7.2 — Template trame d'appel découverte
+- Date : 2026-09-28
+- Fichier cible : templates/interviews/trame-appel-decouverte_modele.md
+- Résultat : COMPLETE
+- Contenu : checklist pré-appel, 4 phases structurées (ouverture, découverte 5 sous-sections, présentation, closing 3 scénarios), table de notes, rappels clés. Durée cible 25-35 min.
+
 ### LOT 7.1 — Template message de prospection directe (COMPLETE)
 - ID : 7.1 — Template message de prospection
 - Date : 2026-09-28

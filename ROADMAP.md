@@ -110,7 +110,7 @@ Autorisation humaine : APPROVED
 
 ## 7.2 — Template trame d'appel découverte
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer une trame d'appel découverte (téléphone ou visio) pour qualifier un prospect et structurer le premier entretien commercial.
 
