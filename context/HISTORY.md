@@ -9,6 +9,13 @@
 
 ## 2026-09-28
 
+### Session LOT 7 — Boîte à outils Prospection (COMPLETE)
+- LOT 7 défini et exécuté en une session : 3 sous-lots, 3 ressources livrées et sauvegardées
+- 7.1 : template de messages de prospection directe (LinkedIn + email, 4 situations, 3 relances)
+- 7.2 : trame d'appel découverte (25-35 min, 4 phases, 3 scénarios de closing)
+- 7.3 : SOP prospection et relance (cycle complet 5 phases, rythme hebdomadaire)
+- 3 commits GitHub : 237f9a1, 4ea300d, 00a6f59
+
 ### LOT 7.3 — SOP prospection et relance (COMPLETE)
 - ID : 7.3 — SOP prospection et relance
 - Date : 2026-09-28
