@@ -78,3 +78,78 @@ Tests validés humainement et aucun blocker critique.
 
 Dépendances :
 6.1 COMPLETE
+
+# LOT 7 — Boîte à outils Prospection
+
+Objectif global :
+Créer les templates et procédures essentiels pour outiller la prospection active :
+message de premier contact, trame d'appel découverte, et SOP de prospection/relance.
+
+## 7.1 — Template message de prospection
+
+Statut : COMPLETE
+Objectif :
+Créer un template de messages de prospection directe (LinkedIn et email) adapté à la cible dirigeant BTP/TPE qui structure sa croissance.
+
+Action attendue :
+Produire un fichier template structuré avec variantes par canal (LinkedIn, email) et par situation (contact froid, contact chaud, rebond sur publication), avec placeholders clairs et séquence de relances.
+
+Destination cible :
+templates/
+
+Fichier cible :
+templates/prospection/message-prospection-directe_modele.md
+
+Critère de validation :
+Le fichier existe, couvre au minimum 3 situations de prospection avec des messages prêts à personnaliser, et a passé une revue humaine.
+
+Dépendances :
+LOT 6 COMPLETE
+
+Autorisation humaine : APPROVED
+
+## 7.2 — Template trame d'appel découverte
+
+Statut : TODO
+Objectif :
+Créer une trame d'appel découverte (téléphone ou visio) pour qualifier un prospect et structurer le premier entretien commercial.
+
+Action attendue :
+Produire un fichier template avec ouverture, questions de qualification, présentation de l'offre et closing, avec durée indicative par section.
+
+Destination cible :
+templates/
+
+Fichier cible :
+templates/interviews/trame-appel-decouverte_modele.md
+
+Critère de validation :
+Le fichier existe, couvre la structure complète d'un appel découverte (ouverture, qualification, présentation, closing), et a passé une revue humaine.
+
+Dépendances :
+7.1 COMPLETE
+
+Autorisation humaine : APPROVED
+
+## 7.3 — SOP prospection et relance
+
+Statut : TODO
+Objectif :
+Créer une procédure standard pour piloter un cycle de prospection de bout en bout : identification, premier contact, relances et clôture.
+
+Action attendue :
+Produire un fichier SOP avec les étapes séquencées, les délais de relance, les critères de go/no-go et les règles de clôture (abandon ou conversion vers appel découverte).
+
+Destination cible :
+sop/
+
+Fichier cible :
+sop/commercial/prospection-et-relance.md
+
+Critère de validation :
+Le fichier existe, couvre le cycle complet (identification → contact → relances → clôture), et a passé une revue humaine.
+
+Dépendances :
+7.2 COMPLETE
+
+Autorisation humaine : APPROVED
