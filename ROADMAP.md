@@ -133,7 +133,7 @@ Autorisation humaine : APPROVED
 
 ## 7.3 — SOP prospection et relance
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer une procédure standard pour piloter un cycle de prospection de bout en bout : identification, premier contact, relances et clôture.
 

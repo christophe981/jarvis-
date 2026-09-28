@@ -9,6 +9,13 @@
 
 ## 2026-09-28
 
+### LOT 7.3 — SOP prospection et relance (COMPLETE)
+- ID : 7.3 — SOP prospection et relance
+- Date : 2026-09-28
+- Fichier cible : sop/commercial/prospection-et-relance.md
+- Résultat : COMPLETE
+- Contenu : 5 phases (identification, premier contact, 3 relances J+5/J+10/J+20, transition appel, clôture), fiche de suivi prospect, critères GO/NO-GO, rythme hebdomadaire recommandé. LOT 7 complet (7.1 + 7.2 + 7.3 COMPLETE).
+
 ### LOT 7.2 — Template trame d'appel découverte (COMPLETE)
 - ID : 7.2 — Template trame d'appel découverte
 - Date : 2026-09-28
