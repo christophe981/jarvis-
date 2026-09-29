@@ -185,7 +185,7 @@ Autorisation humaine : APPROVED
 
 ## 8.2 — Template pipeline commercial
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer une vue globale de tous les prospects actifs sur une seule page pour piloter le pipeline commercial.
 

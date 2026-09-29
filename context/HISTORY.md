@@ -9,6 +9,13 @@
 
 ## 2026-09-28
 
+### LOT 8.2 — Template pipeline commercial (COMPLETE)
+- ID : 8.2 — Template pipeline commercial
+- Date : 2026-09-29
+- Fichier cible : templates/commercial/pipeline-commercial_modele.md
+- Résultat : COMPLETE
+- Contenu : vue globale du pipe avec tableau de bord (6 métriques), 7 sections par statut (Identifié, Contacté, Relancé, En échange, Appel, Offre envoyée, Clos), tableau d'actions prioritaires semaine suivante, notes de revue.
+
 ### LOT 8.1 — Template fiche prospect (COMPLETE)
 - ID : 8.1 — Template fiche prospect
 - Date : 2026-09-28
