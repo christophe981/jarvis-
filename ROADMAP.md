@@ -208,7 +208,7 @@ Autorisation humaine : APPROVED
 
 ## 8.3 — SOP revue hebdomadaire pipeline
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer une procédure standard pour faire le point chaque semaine sur le pipeline commercial.
 
