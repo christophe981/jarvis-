@@ -228,3 +228,103 @@ Dépendances :
 8.2 COMPLETE
 
 Autorisation humaine : APPROVED
+
+# LOT 9 — Agent Marketing
+
+Objectif global :
+Créer l'agent Marketing de Jarvis, orienté création de contenu, présence sur LinkedIn et Instagram, positionnement et communication de l'activité OBM, sans décision autonome et sans modifier les autres agents.
+
+## 9.1 — Agent Marketing _(en cours)_
+
+Statut : TODO
+Objectif :
+Créer l'agent Marketing v1 de Jarvis.
+
+Action attendue :
+Construire un agent capable de :
+- préparer et structurer des publications LinkedIn et Instagram ;
+- proposer des angles de contenu adaptés au positionnement OBM de Christophe ;
+- aider à construire et raffiner le positionnement et le message commercial ;
+- préparer des accroches, des newsletters ou des séquences de contenu ;
+- rester dans une logique d'assistance et de validation humaine.
+
+Destination cible :
+.claude/agents/
+
+Fichier cible :
+.claude/agents/marketing.md
+
+Critère de validation :
+Le fichier marketing.md existe, respecte le format canonique des agents du workspace, définit clairement son rôle, ses limites, ses déclencheurs et son fonctionnement, et passe une revue humaine.
+
+Dépendances :
+LOT 8 COMPLETE
+
+Autorisation humaine : APPROVED
+
+# LOT 10 — Agent Automation
+
+Objectif global :
+Créer l'agent Automation de Jarvis, orienté n8n, Airtable, API, MCP et automatisations, pour assister Christophe dans la conception et la mise en œuvre de workflows automatisés, sans exécution autonome.
+
+## 10.1 — Agent Automation
+
+Statut : TODO
+Objectif :
+Créer l'agent Automation v1 de Jarvis.
+
+Action attendue :
+Construire un agent capable de :
+- concevoir des workflows n8n adaptés aux besoins clients ;
+- structurer des bases Airtable pour le pilotage et le suivi ;
+- identifier les tâches automatisables dans une activité OBM ou chez un client ;
+- proposer des architectures d'automatisation simples et fiables ;
+- documenter les choix techniques et les points de maintenance ;
+- rester dans une logique d'assistance et de validation humaine.
+
+Destination cible :
+.claude/agents/
+
+Fichier cible :
+.claude/agents/automation.md
+
+Critère de validation :
+Le fichier automation.md existe, respecte le format canonique des agents du workspace, définit clairement son rôle, ses limites, ses déclencheurs et son fonctionnement, et passe une revue humaine.
+
+Dépendances :
+9.1 COMPLETE
+
+Autorisation humaine : APPROVED
+
+# LOT 11 — Agent Business
+
+Objectif global :
+Créer l'agent Business de Jarvis, orienté objectifs, indicateurs, décisions stratégiques, rentabilité et développement de l'activité OBM, pour assister Christophe dans le pilotage global de son activité.
+
+## 11.1 — Agent Business
+
+Statut : TODO
+Objectif :
+Créer l'agent Business v1 de Jarvis.
+
+Action attendue :
+Construire un agent capable de :
+- suivre et analyser les indicateurs clés de l'activité (CA, pipeline, rentabilité) ;
+- structurer et challenger les décisions stratégiques ;
+- évaluer des opportunités (nouveaux clients, nouvelles offres, pivots) ;
+- produire des bilans périodiques et des points de situation ;
+- rester dans une logique d'assistance et de validation humaine.
+
+Destination cible :
+.claude/agents/
+
+Fichier cible :
+.claude/agents/business.md
+
+Critère de validation :
+Le fichier business.md existe, respecte le format canonique des agents du workspace, définit clairement son rôle, ses limites, ses déclencheurs et son fonctionnement, et passe une revue humaine.
+
+Dépendances :
+10.1 COMPLETE
+
+Autorisation humaine : APPROVED
