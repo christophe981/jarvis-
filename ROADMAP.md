@@ -234,9 +234,9 @@ Autorisation humaine : APPROVED
 Objectif global :
 Créer l'agent Marketing de Jarvis, orienté création de contenu, présence sur LinkedIn et Instagram, positionnement et communication de l'activité OBM, sans décision autonome et sans modifier les autres agents.
 
-## 9.1 — Agent Marketing _(en cours)_
+## 9.1 — Agent Marketing
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer l'agent Marketing v1 de Jarvis.
 
@@ -269,7 +269,7 @@ Créer l'agent Automation de Jarvis, orienté n8n, Airtable, API, MCP et automat
 
 ## 10.1 — Agent Automation
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer l'agent Automation v1 de Jarvis.
 
@@ -303,7 +303,7 @@ Créer l'agent Business de Jarvis, orienté objectifs, indicateurs, décisions s
 
 ## 11.1 — Agent Business
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer l'agent Business v1 de Jarvis.
 

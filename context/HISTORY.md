@@ -9,6 +9,27 @@
 
 ## 2026-10-01
 
+### LOT 11.1 — Agent Business (COMPLETE)
+- ID : 11.1 — Agent Business
+- Date : 2026-10-01
+- Fichier cible : .claude/agents/business.md
+- Résultat : COMPLETE
+- Contenu : agent Business v1 — suivi indicateurs clés (CA, pipeline, taux de conversion), analyse rentabilité, structuration décisions stratégiques, évaluation opportunités, bilans périodiques. Mode assistance, jamais de décision irréversible seul, Human Gates sur tout engagement financier ou contractuel.
+
+### LOT 10.1 — Agent Automation (COMPLETE)
+- ID : 10.1 — Agent Automation
+- Date : 2026-10-01
+- Fichier cible : .claude/agents/automation.md
+- Résultat : COMPLETE
+- Contenu : agent Automation v1 — conception workflows n8n, structuration bases Airtable, identification tâches automatisables, documentation automatisations, intégrations API/MCP. Mode assistance, jamais de déploiement autonome, Human Gates sur tout déploiement ou connexion externe.
+
+### LOT 9.1 — Agent Marketing (COMPLETE)
+- ID : 9.1 — Agent Marketing
+- Date : 2026-10-01
+- Fichier cible : .claude/agents/marketing.md
+- Résultat : COMPLETE
+- Contenu : agent Marketing v1 — publications LinkedIn/Instagram, positionnement, séquences de contenu, newsletters, analyse d'accroches. Mode assistance, jamais de publication autonome, Human Gates sur tout envoi.
+
 ### LOT 8.3 — SOP revue hebdomadaire pipeline (COMPLETE)
 - ID : 8.3 — SOP revue hebdomadaire pipeline
 - Date : 2026-10-01
