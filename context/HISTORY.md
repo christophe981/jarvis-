@@ -9,6 +9,17 @@
 
 ## 2026-10-01
 
+### LOT 12.1 — Skill Fathom vers compte-rendu client (COMPLETE)
+- ID : 12.1 — Skill Fathom vers compte-rendu client
+- Date : 2026-10-01
+- Fichier cible : .claude/skills/fathom-compte-rendu-client/SKILL.md
+- Résultat : COMPLETE
+- Contenu : skill Fathom v1 — résolution d'enregistrement par URL/call ID (MCP Fathom), récupération transcription et résumé, analyse via meeting-intelligence, proposition de mise à jour dossier client. Mode assistance, aucune écriture automatique, Human Gate avant toute modification dans clients/.
+
+---
+
+
+
 ### LOT 11.1 — Agent Business (COMPLETE)
 - ID : 11.1 — Agent Business
 - Date : 2026-10-01

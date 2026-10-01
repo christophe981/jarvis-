@@ -336,9 +336,9 @@ Créer le skill Fathom vers compte-rendu client, qui récupère automatiquement
 une transcription Fathom via MCP, l'analyse avec meeting-intelligence et propose
 la mise à jour du dossier client Jarvis.
 
-## 12.1 — Skill Fathom vers compte-rendu client _(en cours)_
+## 12.1 — Skill Fathom vers compte-rendu client
 
-Statut : TODO
+Statut : COMPLETE
 Objectif :
 Créer le skill qui relie Fathom à Jarvis pour transformer un appel enregistré
 en compte-rendu structuré et mise à jour du dossier client.
