@@ -328,3 +328,41 @@ Dépendances :
 10.1 COMPLETE
 
 Autorisation humaine : APPROVED
+
+# LOT 12 — Skill Fathom vers compte-rendu client
+
+Objectif global :
+Créer le skill Fathom vers compte-rendu client, qui récupère automatiquement
+une transcription Fathom via MCP, l'analyse avec meeting-intelligence et propose
+la mise à jour du dossier client Jarvis.
+
+## 12.1 — Skill Fathom vers compte-rendu client _(en cours)_
+
+Statut : TODO
+Objectif :
+Créer le skill qui relie Fathom à Jarvis pour transformer un appel enregistré
+en compte-rendu structuré et mise à jour du dossier client.
+
+Action attendue :
+Construire un skill capable de :
+- récupérer une transcription et un résumé Fathom via URL ou call ID (MCP Fathom) ;
+- passer le contenu à meeting-intelligence pour analyse structurée ;
+- proposer la mise à jour du dossier client (actions, décisions, statut, historique) ;
+- rester dans une logique d'assistance et de validation humaine (aucune écriture automatique).
+
+Destination cible :
+.claude/skills/
+
+Fichier cible :
+.claude/skills/fathom-compte-rendu-client/SKILL.md
+
+Critère de validation :
+Le fichier SKILL.md existe dans .claude/skills/fathom-compte-rendu-client/,
+respecte le format canonique des skills du workspace, définit clairement
+son rôle, ses déclencheurs et son fonctionnement avec le MCP Fathom,
+et passe une revue humaine.
+
+Dépendances :
+LOT 11 COMPLETE
+
+Autorisation humaine : APPROVED
