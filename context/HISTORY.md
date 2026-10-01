@@ -7,6 +7,16 @@
 
 ---
 
+## 2026-10-01
+
+### LOT 8.3 — SOP revue hebdomadaire pipeline (COMPLETE)
+- ID : 8.3 — SOP revue hebdomadaire pipeline
+- Date : 2026-10-01
+- Fichier cible : sop/commercial/revue-hebdomadaire-pipeline.md
+- Résultat : COMPLETE
+
+---
+
 ## 2026-09-28
 
 ### LOT 8.2 — Template pipeline commercial (COMPLETE)
